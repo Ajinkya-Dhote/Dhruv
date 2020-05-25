@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {MediaObserver, MediaChange} from '@angular/flex-layout';
-import { Subscription } from 'rxjs';
+import { MediaTypeService } from  '@services/media-type.service';
+import { DeviceType } from '@models/DeviceType';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +9,15 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   title = 'frontend';
-  mediaSub: Subscription;
-  deviceXs: boolean;
+  deviceType: DeviceType;
 
-  constructor(private meddiaObserver: MediaObserver) {}
+  constructor(private media: MediaTypeService) {}
 
   ngOnInit() {
-    this.mediaSub = this.meddiaObserver.media$.subscribe((result: MediaChange) => {
-      console.log(result.mqAlias);
-      this.deviceXs = result.mqAlias === 'xs' ? true : false;
-    })
+    this.media.type.subscribe(type => this.deviceType = type);
   }
 
   ngOnDestroy() {
-    this.mediaSub.unsubscribe();
+   
   }
 }

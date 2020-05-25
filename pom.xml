@@ -1,0 +1,16 @@
+<model>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.dhruv</groupId>
+  <artifactId>Dhruv</artifactId>
+  <packaging>pom</packaging>
+  <version>sun</version>
+  <name>Project Dhruv</name>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</model>

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCardComponent implements OnInit {
 
+  addedToCart: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleCart() {
+    this.addedToCart = !this.addedToCart;
   }
 
 }

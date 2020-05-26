@@ -18,7 +18,10 @@
         <mat-form-field class="example-full-width" >
             <mat-label>Location</mat-label>
             <mat-icon matPrefix class="app-icon">location_on</mat-icon>
-            <mat-select>
+            <mat-select #selectedCity>
+                <mat-select-trigger>
+                    <span>{{selectedCity.value}}</span>
+                  </mat-select-trigger>
                 <mat-option *ngFor="let city of cities" [value]="city.value">
                     <mat-icon>location_city</mat-icon>
                     <span>{{city.viewValue}}</span>

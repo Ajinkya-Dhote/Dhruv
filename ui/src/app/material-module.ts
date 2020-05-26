@@ -18,9 +18,7 @@ import {MatCardModule} from '@angular/material/card';
         MatProgressBarModule,
         MatButtonModule,
         MatSelectModule,
-        MatCardModule
-        // MatNativeDateModule,
-        // MatRippleModule
+        MatCardModule,
     ]
 })
 

@@ -17,7 +17,10 @@
     ],
     "paths": {
       "@services/*": ["src/app/common/services/*"],
-      "@models/*": ["src/app/common/models/*"]
+      "@models/*": ["src/app/common/models/*"],
+      "@components/*": ["src/app/components/*"],
+      "@reusable-components/*": ["src/app/common/components/*"],
+      "@environments/*": ["src/environments/*"]
   }
   },
   "angularCompilerOptions": {

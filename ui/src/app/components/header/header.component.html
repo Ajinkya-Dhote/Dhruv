@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" >
+      <span>Application Name </span>
+      <mat-form-field class="example-full-width full-scree" *ngIf='deviceType === "lg"'>
+        <mat-label>Location</mat-label>
+        <mat-icon matPrefix class="app-icon">location_on</mat-icon>
+        <mat-select>
+            <mat-option *ngFor="let city of cities" [value]="city.value">
+                <mat-icon>location_city</mat-icon>
+                <span>{{city.viewValue}}</span>
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-icon>menu</mat-icon>
+    </mat-toolbar-row>
+  
+    <mat-toolbar-row *ngIf='deviceType !== "lg"'>
+        <mat-form-field class="example-full-width" >
+            <mat-label>Location</mat-label>
+            <mat-icon matPrefix class="app-icon">location_on</mat-icon>
+            <mat-select>
+                <mat-option *ngFor="let city of cities" [value]="city.value">
+                    <mat-icon>location_city</mat-icon>
+                    <span>{{city.viewValue}}</span>
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <!-- <mat-icon>menu</mat-icon> -->
+    </mat-toolbar-row>
+  </mat-toolbar>

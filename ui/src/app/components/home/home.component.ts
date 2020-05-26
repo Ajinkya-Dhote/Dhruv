@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ResourceService } from '@services/resource.service';
 // import { GreetingComponent } from '@reusable-components/greeting/greeting.component';
 
 @Component({
@@ -9,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  products: any;
+
+  constructor(private resource: ResourceService) { }
 
   ngOnInit(): void {
+    this.resource.getProductList()
+        .subscribe(products => {
+          console.log(products);
+          this.products = products;
+        });
   }
 
 }

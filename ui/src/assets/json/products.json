@@ -1,0 +1,114 @@
+[
+    {
+        "id": "w1",
+        "name": "Sharbati Wheat Flour",
+        "tagline": "sab se sudh aata",
+        "categoery": "flour",
+        "image": "assets/images/flour.jpg",
+        "availabelIn": [10, 20, 30],
+        "description": "Murgi Ka Jaane Ande Ka Kya Hoga Are Life Milegi Ya Tave Pe Fry Hoga Koyi Na Jaane Apana Future Kya Hoga Hont Ghuma Siti Baja, Siti Bajaake Bol Bhaiya Aal Izz Well, Are Bhaiya Aal Izz Well Are Chaachu Aal Izz Well, Are Bhaiya Aal Izz Well",
+        "price": [
+            {
+                "10": {
+                    "price": 40,
+                    "discount": 10,
+                    "discount price": 36
+                },
+                "20": {
+                    "price": 80,
+                    "discount": 15,
+                    "discount price": 68
+                },
+                "30": {
+                    "price": 120,
+                    "discount": 20,
+                    "discount price": 96
+                }
+            }
+        ]
+    },
+    {
+        "id": "w2",
+        "name": "Accha wala Wheat Flour",
+        "tagline": "ye wala bhi sudh hai",
+        "categoery": "flour",
+        "image": "assets/images/flour.jpg",
+        "availabelIn": [10, 20, 30],
+        "description": "Jhatka zara sa mehsoos hua ek Life ki gaadi ne kass ke maara brake Ho raha hai kyun confuse mere dil Mashwara mera tu aazma ke dekh",
+        "price": [
+            {
+                "10": {
+                    "price": 40,
+                    "discount": 10,
+                    "discount price": 36
+                },
+                "20": {
+                    "price": 80,
+                    "discount": 15,
+                    "discount price": 68
+                },
+                "30": {
+                    "price": 120,
+                    "discount": 20,
+                    "discount price": 96
+                }
+            }
+        ]
+    },
+    {
+        "id": "w3",
+        "name": "MP Wheat Flour",
+        "tagline": "ye bhi wahi hai aacha wala aata",
+        "categoery": "flour",
+        "image": "assets/images/flour.jpg",
+        "availabelIn": [10, 20, 30],
+        "description": "Baby shark, doo, doo, doo, doo, doo, doo Baby shark, doo, doo, doo, doo, doo, doo Baby shark, doo, doo, doo, doo, doo, doo Baby shark",
+        "price": [
+            {
+                "10": {
+                    "price": 40,
+                    "discount": 10,
+                    "discount price": 36
+                },
+                "20": {
+                    "price": 80,
+                    "discount": 15,
+                    "discount price": 68
+                },
+                "30": {
+                    "price": 120,
+                    "discount": 20,
+                    "discount price": 96
+                }
+            }
+        ]
+    },
+    {
+        "id": "w4",
+        "name": "Super Wheat Flour",
+        "categoery": "flour",
+        "tagline": "kya likhu ab samaj nahi aa raha",
+        "image": "assets/images/flour.jpg",
+        "availabelIn": [10, 20, 30],
+        "description": "Johny, Johny, yes, papa Eating sugar? No, papa Telling lies? No, papa Open your mouth, hahaha!",
+        "price": [
+            {
+                "10": {
+                    "price": 40,
+                    "discount": 10,
+                    "discount price": 36
+                },
+                "20": {
+                    "price": 80,
+                    "discount": 15,
+                    "discount price": 68
+                },
+                "30": {
+                    "price": 120,
+                    "discount": 20,
+                    "discount price": 96
+                }
+            }
+        ]
+    }
+]

@@ -1,12 +1,11 @@
 <app-greeting></app-greeting>
 
 <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center" style="padding: 10px" >
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
-    <app-product-card fxFlex.xs="100" fxFlex.lg="30"></app-product-card>
+    
+    <app-product-card 
+        fxFlex.xs="100" 
+        fxFlex.lg="30" 
+        *ngFor="let product of products"
+        [product]='product'></app-product-card>
    
 </div>

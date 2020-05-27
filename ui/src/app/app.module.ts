@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { GreetingComponent } from './common/components/greeting/greeting.component';
 import { ProductCardComponent } from './common/components/product-card/product-card.component';
+import { QuantitySelectComponent } from './common/components/quantity-select/quantity-select.component';
+import { CounterComponent } from './common/components/counter/counter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ProductCardComponent } from './common/components/product-card/product-c
     HeaderComponent,
     HomeComponent,
     GreetingComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    QuantitySelectComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,

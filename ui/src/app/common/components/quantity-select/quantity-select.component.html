@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Select Quantity</mat-card-title>
+        <mat-card-subtitle>Pick what you need</mat-card-subtitle>
+      </mat-card-header>
+</mat-card>
+<mat-card *ngFor="let price of product.price | keyvalue" class="quantiy-selection-card" >
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div mat-card-avatar class="quantity-header"></div>
+        <button mat-mini-fab [disabled]="counter._value  === 0" aria-label="Kg">
+            {{price.key}}Kg
+        </button>
+        <button mat-stroked-button>
+            <del *ngIf="price.value.discount !==0"> &nbsp; {{price.value.price}} &nbsp; </del>
+            <span *ngIf="price.value.discount ===0"> &nbsp; {{price.value.price}} &nbsp; </span>
+            <span *ngIf="price.value.discount !==0"> &nbsp; {{price.value["discount price"]}} &nbsp;</span>
+            <span>Rs</span>
+        </button>
+
+        <app-counter #counter [value]="_value || 0" 
+                    [step]="_step" [min]="_min" [max]="_max" [wrap]="_wrap" 
+                    (clicked)="onCounterChange(price, $event)">
+        </app-counter>
+    </div>
+</mat-card>
+
+<mat-card fxLayout="row" fxLayoutAlign="space-between center">
+    <div> Actual cost: <button mat-stroked-button color="primary"><del>{{totalCost}} Rs</del></button></div>
+    <div> Final : <button mat-stroked-button color="accent"> {{totalCostAfterdDiscount}} Rs</button></div>
+   
+    
+</mat-card>

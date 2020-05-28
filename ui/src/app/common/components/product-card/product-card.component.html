@@ -17,15 +17,15 @@
     <mat-card-actions>
         <button mat-button color="accent" aria-label="Add to cart" *ngIf="!addedToCart" (click)="toggleCart()">
             <mat-icon>add_shopping_cart</mat-icon>
-            Add to cart
+            {{ 'PRODUCT.ADD_TO_CART' | translate}}
         </button>
         <button mat-button color="warn" aria-label="Add to cart" *ngIf="addedToCart" (click)="toggleCart()">
             <mat-icon>remove_shopping_cart</mat-icon>
-            Remove from cart
+            {{ 'PRODUCT.REMOVE_FROM_CART' | translate}}
         </button>
         <button mat-button color="accent" aria-label="Purchase" *ngIf="!addedToCart">
             <mat-icon>shopping_cart</mat-icon>
-            Purchase
+            {{ 'PRODUCT.PURCHASE' | translate}}
         </button>
     </mat-card-actions>
   </mat-card>

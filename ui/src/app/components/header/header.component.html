@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" >
-      <span>Application Name </span>
+      <span class="app-name"> {{ 'HOME.TITLE' | translate }} </span>
       <mat-form-field class="example-full-width full-scree" *ngIf='deviceType === "lg"'>
-        <mat-label>Location</mat-label>
+        <mat-label> {{ 'HOME.LOCATION' | translate }} </mat-label>
             <mat-icon matPrefix class="app-icon">location_on</mat-icon>
             <mat-select #selectedCity>
                 <mat-select-trigger>
@@ -14,7 +14,22 @@
                 </mat-option>
               </mat-select>
       </mat-form-field>
-      <mat-icon>menu</mat-icon>
+      <span fxFlex></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>language</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLanguageSelect('en')">
+          <span>English</span>
+        </button>
+        <button mat-menu-item (click)="onLanguageSelect('hi')">
+          <span>Hindi</span>
+        </button>
+        <button mat-menu-item (click)="onLanguageSelect('mr')">
+          <span>Marathi</span>
+        </button>
+      </mat-menu>
+      <mat-icon class="menu-icon">menu</mat-icon>
     </mat-toolbar-row>
   
     <mat-toolbar-row *ngIf='deviceType !== "lg"'>

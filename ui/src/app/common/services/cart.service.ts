@@ -5,5 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class CartService {
 
-  constructor() { }
+    item: any[];
+
+    constructor() { }
+
+    add() {
+      
+    }
 }

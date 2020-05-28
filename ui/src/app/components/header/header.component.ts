@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 
 import { MediaTypeService } from  '@services/media-type.service';
+import { LanguageService } from '@services/language.service';
+
 import { DeviceType } from '@models/DeviceType';
 
 interface CITIES {
@@ -27,15 +29,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   deviceType: DeviceType;
 
-  constructor(private media: MediaTypeService) {}
+    constructor(private media: MediaTypeService,
+                private language: LanguageService) {}
 
-  ngOnInit() {
-    this.title = environment.APP_NAME;
-    this.media.type.subscribe(type => this.deviceType = type);
-  }
+    ngOnInit() {
+        this.title = environment.APP_NAME;
+        this.media.type.subscribe(type => this.deviceType = type);
+    }
 
-  ngOnDestroy() {
-    this.media.type.unsubscribe();
-  }
+    ngOnDestroy() {
+        this.media.type.unsubscribe();
+    }
 
+    onLanguageSelect(lang) {
+        this.language.changeLanguage(lang);
+    }
+ 
 }

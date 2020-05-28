@@ -45,16 +45,6 @@ export class QuantitySelectComponent implements OnInit {
     this.calculateTotalPrice(this.totalPrice);
   }
 
-  onSliderValueChange(price: any, quantity: number) {
-    this.totalPrice[price.key] = {
-      "quantity": quantity,
-      "price": price.value.price,
-      "discountPrice": price.value["discount price"] 
-    };
-    // console.log(this.totalPrice);
-    this.calculateTotalPrice(this.totalPrice);
-  }
-
   calculateTotalPrice(totalPrice) {
     // Object.keys(totalPrice).forEach(price => {
     //   console.log(price);

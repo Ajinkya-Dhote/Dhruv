@@ -1,0 +1,14 @@
+{
+    "HOME": {
+        "TITLE": "Application name",
+        "LOCATION": "Location",
+        "GREETING": "Hi, Good Morning {{user}}"
+
+    },
+    "PRODUCT": {
+        "NAME": "Sharbati Wheat Flour",
+        "ADD_TO_CART": "Add to cart",
+        "REMOVE_FROM_CART": "Remove from cart",
+        "PURCHASE": "Purchase"
+    }
+}

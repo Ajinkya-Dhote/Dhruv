@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +17,10 @@ import { GreetingComponent } from './common/components/greeting/greeting.compone
 import { ProductCardComponent } from './common/components/product-card/product-card.component';
 import { QuantitySelectComponent } from './common/components/quantity-select/quantity-select.component';
 import { CounterComponent } from './common/components/counter/counter.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -33,7 +39,14 @@ import { CounterComponent } from './common/components/counter/counter.component'
     HttpClientModule,
     FlexLayoutModule,
     AppMaterialModule,
-    ServiceModule.forRoot()
+    ServiceModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

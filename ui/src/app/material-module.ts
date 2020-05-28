@@ -11,6 +11,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatMenuModule} from '@angular/material/menu';
 
 // import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
@@ -29,7 +30,8 @@ import {MatChipsModule} from '@angular/material/chips';
         MatSliderModule,
         FormsModule,
         ReactiveFormsModule,
-        MatChipsModule
+        MatChipsModule,
+        MatMenuModule
     ]
 })
 

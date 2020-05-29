@@ -1,6 +1,6 @@
 {
     "HOME": {
-        "TITLE": "Application name",
+        "TITLE": "Pratideen",
         "LOCATION": "Location",
         "GREETING": "Hi, Good Morning {{user}}"
 

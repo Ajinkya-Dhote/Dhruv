@@ -28,9 +28,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ];
 
   deviceType: DeviceType;
+  promptEvent:any;
+
 
     constructor(private media: MediaTypeService,
-                private language: LanguageService) {}
+                private language: LanguageService) {
+      window.addEventListener('beforeinstallprompt', event => {
+        this.promptEvent = event;
+      });
+    }
 
     ngOnInit() {
         this.title = environment.APP_NAME;
@@ -43,6 +49,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onLanguageSelect(lang) {
         this.language.changeLanguage(lang);
+    }
+
+    installPwa(): void {
+      this.promptEvent.prompt();
     }
  
 }

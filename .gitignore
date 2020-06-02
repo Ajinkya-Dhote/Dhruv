@@ -23,4 +23,7 @@
 hs_err_pid*
 .project
 .settings/**
-
+.idea/**
+**/.firebase/**
+.firebaserc
+*.iml

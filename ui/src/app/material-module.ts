@@ -12,6 +12,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 // import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
@@ -31,7 +32,8 @@ import {MatMenuModule} from '@angular/material/menu';
         FormsModule,
         ReactiveFormsModule,
         MatChipsModule,
-        MatMenuModule
+        MatMenuModule,
+        MatGridListModule
     ]
 })
 

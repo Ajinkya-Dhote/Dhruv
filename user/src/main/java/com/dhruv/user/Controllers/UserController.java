@@ -24,18 +24,23 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<User> getUserData(@RequestParam(value = "id") String id){
-        return new ResponseEntity<User>(userService.getUserByMail(id), HttpStatus.OK);
+        return new ResponseEntity<User>(userService.getUserByMail(id), HttpStatus.FOUND);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
+        return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.FOUND);
     }
 
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestParam(value = "id" ) String id,
                                            @RequestBody User user){
         return new ResponseEntity<User>(userService.updateUser(id, user), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestParam(value = "id") String id){
+        return new ResponseEntity<String>(userService.deleteUser(id), HttpStatus.OK);
     }
 
 }

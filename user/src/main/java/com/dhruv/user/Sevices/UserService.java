@@ -39,5 +39,14 @@ public class UserService {
         return updateUser;
     }
 
+    public String deleteUser(String id){
+        String response = "id not present";
+        if (userRepo.existsById(id)) {
+            userRepo.deleteById(id);
+            response = "success";
+        }
+        return response;
+    }
+
 
 }

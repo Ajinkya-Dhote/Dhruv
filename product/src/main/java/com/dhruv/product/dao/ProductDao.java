@@ -1,4 +1,4 @@
-package com.dhruv.product.services;
+package com.dhruv.product.dao;
 
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.model.Product;
@@ -6,13 +6,12 @@ import com.dhruv.product.model.Product;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductService {
-
+public interface ProductDao {
     List<Product> findAll() throws ProductException;
 
-    Optional<Product> findById(Integer id) throws ProductException;
+    Optional<Product> findById(int id) throws ProductException;
 
     void save(Product product) throws ProductException;
 
-    boolean delete(Integer id) throws  ProductException;
+    boolean deleteById(int id) throws ProductException;
 }

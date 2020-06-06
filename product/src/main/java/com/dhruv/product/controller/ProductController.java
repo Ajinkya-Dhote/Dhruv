@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @RestController("/")
@@ -19,22 +20,31 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    public ResponseEntity<String> error() {
+        return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_IMPLEMENTED);
+    }
+
     @GetMapping()
     public ResponseEntity getAllProduct() {
         LOGGER.debug("Finding all products");
 
-        return new ResponseEntity(service.findAll(), HttpStatus.FOUND);
+        try {
+            return new ResponseEntity(service.findAll(), HttpStatus.FOUND);
+        } catch (ProductException e) {
+            LOGGER.error("No Product found in databse, returning empty set");
+            return new ResponseEntity(Arrays.asList(), HttpStatus.FOUND);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") String id) {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Integer id) {
         LOGGER.debug("getting product by id: {}", id);
         try {
             Optional<Product> user =  service.findById(id);
             if (user.isPresent()) {
                 return new ResponseEntity(user.get(), HttpStatus.FOUND);
             } else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
+                return new ResponseEntity("No user found",HttpStatus.NOT_FOUND);
             }
         } catch (ProductException ex) {
             LOGGER.error("Error occurred while getting product for id: {}", id, ex);
@@ -42,31 +52,21 @@ public class ProductController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<Product> create(@RequestBody Product product) {
-        LOGGER.debug("creating product");
+    @PostMapping()
+    public ResponseEntity<String> create(@RequestBody Product product) {
+        LOGGER.info("creating product");
         try {
-            return new ResponseEntity<Product>(service.save(product), HttpStatus.CREATED);
+            service.save(product);
+            return new ResponseEntity<>("Product created", HttpStatus.CREATED);
         } catch (Exception ex) {
             LOGGER.error("Error occurred while creating product", ex);
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Error occurred while creating product", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-    }
-
-    @PutMapping("")
-    public ResponseEntity<Product> update(@RequestBody Product product) {
-        LOGGER.debug("updating product");
-        try {
-            return new ResponseEntity<Product>(service.update(product), HttpStatus.CREATED);
-        } catch (Exception ex) {
-            LOGGER.error("Error occurred while creating product", ex);
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> update (@PathVariable String id) {
+    public ResponseEntity<String> update (@PathVariable int id) {
         LOGGER.debug("delete product");
         try {
             boolean isDeleted = service.delete(id);

@@ -1,21 +1,24 @@
 package com.dhruv.product.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Column;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Document(collection = "Product")
 public class Product {
-
-    @Id
-    String id;
-
     @NonNull
+    Integer id;
     String name;
+    Double price;
+
+    @Column(name="date_first_available")
+    Date dateFirstAvailable;
+
+    boolean available;
 
     String description;
 

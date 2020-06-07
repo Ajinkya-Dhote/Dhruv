@@ -20,6 +20,7 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    @ExceptionHandler
     public ResponseEntity<String> error() {
         return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_IMPLEMENTED);
     }

@@ -11,11 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "products")
-public class Product {
+public class Product extends Stock {
     @NonNull
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String name;
     Double price;

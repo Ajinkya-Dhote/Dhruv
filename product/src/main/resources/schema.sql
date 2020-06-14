@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS stocks (
         id SERIAL NOT NULL PRIMARY KEY,
-        product_id INTEGER REFERENCES products(id),
+        product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
         quantity DOUBLE PRECISION NOT NULL DEFAULT 0.0,
         last_update timestamp DEFAULT now()
 );

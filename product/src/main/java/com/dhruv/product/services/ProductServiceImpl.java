@@ -19,16 +19,19 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private ProductDao productDao;
+
 
     @Override
     public List<Product> findAll() throws ProductException {
-        return repository.findAll();
+        return productDao.findAll();
     }
 
     @Override
     public Optional<Product> findById(Integer id) throws ProductException {
         if (id != null) {
-            return repository.findById(id);
+            return productDao.findById(id);
         } else {
             throw new ProductException(true, "No product id passed");
         }
@@ -37,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void save(Product product) throws ProductException {
         if (product != null) {
-            repository.save(product);
+            productDao.save(product);
         } else {
             throw new ProductException(true, "No product info passed");
         }
@@ -46,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean delete(Integer id) throws ProductException {
         if (id != null) {
-            repository.deleteById(id);
+            productDao.deleteById(id);
             return true;
         } else {
             LOGGER.error("id not passed for delete or is null, id which was passed: {}", id);

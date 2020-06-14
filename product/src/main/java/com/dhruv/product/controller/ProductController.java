@@ -45,7 +45,7 @@ public class ProductController {
             if (user.isPresent()) {
                 return new ResponseEntity(user.get(), HttpStatus.FOUND);
             } else {
-                return new ResponseEntity("No user found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity("No Product found",HttpStatus.NOT_FOUND);
             }
         } catch (ProductException ex) {
             LOGGER.error("Error occurred while getting product for id: {}", id, ex);

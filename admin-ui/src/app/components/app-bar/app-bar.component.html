@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+    <span>My Application</span>
+    <span class="example-spacer"></span>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/home/dashboard']">
+                <mat-icon>dialpad</mat-icon>
+                <span>Dashboard</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/home/products']">
+                <mat-icon>voicemail</mat-icon>
+                <span>Products</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Schemes</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Users</span>
+            </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Sales</span>
+            </button>
+          </mat-menu>
+    </div>
+    
+  </mat-toolbar>

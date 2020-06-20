@@ -56,4 +56,9 @@ public class ProductServiceImpl implements ProductService {
             return false;
         }
     }
+
+    @Override
+    public void update(Integer id, String name, Double price, Double quantity) throws ProductException {
+        productDao.update(id, name, price, quantity);
+    }
 }

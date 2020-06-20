@@ -15,4 +15,6 @@ public interface ProductService {
     void save(Product product) throws ProductException;
 
     boolean delete(Integer id) throws  ProductException;
+
+    void update(Integer id, String name, Double price, Double quantity) throws ProductException;
 }

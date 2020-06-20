@@ -65,4 +65,17 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
         }
 
     }
+
+    @Override
+    public void update(Integer id, String name, Double price, Double quantity) throws ProductException {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+        params.addValue("name", name);
+        params.addValue("price", price);
+        params.addValue("quantity", quantity);
+
+        int result = namedParamJdbcTemplate.update(this.getQuery("updateProduct"), params);
+        int resultq = namedParamJdbcTemplate.update(this.getQuery("updateProductquantity"), params);
+        LOGGER.info("{} rows created in table with data: {}", result, params);
+    }
 }

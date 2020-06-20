@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController("/")
@@ -30,10 +31,10 @@ public class ProductController {
         LOGGER.debug("Finding all products");
 
         try {
-            return new ResponseEntity(service.findAll(), HttpStatus.FOUND);
+            return new ResponseEntity(service.findAll(), HttpStatus.OK);
         } catch (ProductException e) {
             LOGGER.error("No Product found in databse, returning empty set");
-            return new ResponseEntity(Arrays.asList(), HttpStatus.FOUND);
+            return new ResponseEntity(Arrays.asList(), HttpStatus.OK);
         }
     }
 
@@ -43,7 +44,7 @@ public class ProductController {
         try {
             Optional<Product> user =  service.findById(id);
             if (user.isPresent()) {
-                return new ResponseEntity(user.get(), HttpStatus.FOUND);
+                return new ResponseEntity(user.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity("No Product found",HttpStatus.NOT_FOUND);
             }
@@ -64,6 +65,23 @@ public class ProductController {
             return new ResponseEntity("Error occurred while creating product", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<String> update(@RequestBody Map<String, Object> params) {
+        LOGGER.info("Updating product");
+        try {
+            Integer id = (Integer) params.get("id");
+            String name = (String) params.get("name");
+            Double price = Double.parseDouble((String) params.get("price"));
+            Double quantity = Double.parseDouble((String) params.get("quantity"));
+            LOGGER.info("product: {} - {} - {} - {}", id, name, price, quantity);
+            service.update(id, name, price, quantity);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception ex) {
+            LOGGER.error("Error occurred while updating product", ex);
+            return new ResponseEntity("Error occurred while updating product", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")

@@ -9,6 +9,11 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<any[]>("api/product/")
+    return this.http.get<any[]>("api/product/");
+  }
+
+  update(id, name, price, quantity) {
+    console.log(id, name, price, quantity);
+    return this.http.put("api/product/", {id, name, price, quantity});
   }
 }

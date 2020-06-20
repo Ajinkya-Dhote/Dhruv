@@ -16,7 +16,7 @@
       "dom"
     ],
     "paths": {
-      "@components/*": ["src/app/components/*"],
+      "@components/*": ["src/app/components/*", "src/app/common/components/*"],
       "@services/*": ["src/app/services/*"]
   }
   },

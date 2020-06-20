@@ -14,4 +14,6 @@ public interface ProductDao {
     void save(Product product) throws ProductException;
 
     boolean deleteById(int id) throws ProductException;
+
+    void update(Integer id, String name, Double price, Double quantity) throws ProductException;
 }

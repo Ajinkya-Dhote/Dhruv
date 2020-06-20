@@ -1,43 +1,223 @@
 <mat-tab-group>
     <mat-tab label="View">
-        <ng-container *ngTemplateOutlet="loading"></ng-container>
+        <ng-container *ngTemplateOutlet="view"></ng-container>
     </mat-tab>
-    <mat-tab label="Create"> Create</mat-tab>
-  </mat-tab-group>
+    <mat-tab label="Create">
+      <ng-container *ngTemplateOutlet="create"></ng-container>
+    </mat-tab>
+</mat-tab-group>
 
-  <ng-template #loading>
+  <ng-template #view>
     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
       </mat-form-field>
-      
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
         </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Weight </th>
-          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-icon mat-card-avatar >edit</mat-icon>
+                            <mat-card-title>Edit </mat-card-title>
+                            <mat-card-subtitle>product details</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-form-field class="example-full-width" >
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" #name value="{{element.name}}">
+                              </mat-form-field>
+
+                              <mat-form-field class="example-full-width" >
+                                <mat-label>Price</mat-label>
+                                <input matInput type="text" #price value="{{element.price}}">
+                              </mat-form-field>
+                              <mat-form-field class="example-full-width" >
+                                <mat-label>Quantity</mat-label>
+                                <input matInput type="text" #quantity value="{{element.quantity}}">
+                              </mat-form-field>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button color="accent" (click)="save(element.id, name.value, price.value, quantity.value)">Save</button>
+                          </mat-card-actions>
+                        </mat-card>
+                    <div>
+
+                    </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-element"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+</ng-template>
+
+<ng-template #create>
+  <mat-toolbar> Create New Product</mat-toolbar>
+  <div style="padding: 0 20px">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="example-container">
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+        <mat-form-field fxFlex>
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Product Name" [formControl]="nameControl" required>
+
+          <mat-error *ngIf="nameControl.invalid">{{error.getNameError(nameControl)}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <mat-label>Product Type</mat-label>
+          <mat-select [formControl]="typeControl">
+            <mat-option value="atta">Atta</mat-option>
+            <mat-option value="besan">Besan</mat-option>
+            <mat-option value="jowar">Jowar</mat-option>
+            <mat-option value="bajri">Bajari</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="typeControl.invalid">{{error.getTypeError(typeControl)}}</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+        <mat-form-field fxFlex>
+          <mat-label>Product details</mat-label>
+          <input matInput placeholder="Product details" [formControl]="detailControl">
+        </mat-form-field>
+
+
+        <mat-form-field fxFlex>
+          <mat-label>Product Image</mat-label>
+          <input matInput placeholder="Product Image" [formControl]="imageControl" required>
+<!--          <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>-->
+          <mat-icon matSuffix (click)="fileInput.click()" color="accent">attach_file</mat-icon>
+          <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+          <mat-error *ngIf="imageControl.invalid">{{error.getImageError(imageControl)}}</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+      <div>
+        <span>Quantity Configuration</span>
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+          <mat-card>
+              <mat-card-content>
+                  <div fxLayout="row"  fxLayoutAlign.lg=" center" fxLayout.xs="column" fxLayout.sm="column">
+                    <div fxFlex>
+                      <mat-form-field>
+                        <mat-label>Base Quantity</mat-label>
+                        <input fxFlex matInput type="number" placeholder="Base Quantity" [formControl]="baseQuantityControl" required>
+                        <mat-error *ngIf="baseQuantityControl.invalid">{{error.getBaseQuantityError(baseQuantityControl)}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex>
+                      <span>&nbsp;</span>
+                      <mat-radio-group aria-label="Select an option" [formControl]="baseQuantityUnitControl" fxFlex style="padding-top: 10px">
+                        <mat-radio-button value="kg">kg</mat-radio-button> &nbsp;
+                        <mat-radio-button value="gm">gm</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+              </mat-card-content>
+          </mat-card>
+
+
+          <mat-card>
+            <mat-card-content>
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <div fxFlex>
+                  <mat-form-field>
+                    <mat-label>Price for Base quantity</mat-label>
+                    <input fxFlex matInput type="number" placeholder="Price" [formControl]="baseQuantityPriceControl" required>
+                    <mat-error *ngIf="baseQuantityPriceControl.invalid">{{error.getBaseQuantityPriceError(baseQuantityPriceControl)}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+
+          <mat-card>
+              <mat-card-content>
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                  <div fxFlex>
+                    <mat-form-field>
+                      <mat-label>Min Quantity</mat-label>
+                      <input fxFlex matInput type="number" placeholder="Min Quantity" [formControl]="minQuantityControl" required>
+                      <mat-error *ngIf="minQuantityControl.invalid">{{error.getMinQuantityError(minQuantityControl)}}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card>
+            <mat-card-content>
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <div fxFlex>
+                  <mat-form-field>
+                    <mat-label>Max Quantity</mat-label>
+                    <input fxFlex matInput type="number" placeholder="Max Quantity" [formControl]="maxQuantityControl" required>
+                    <mat-error *ngIf="maxQuantityControl.invalid">{{error.getMaxQuantityError(maxQuantityControl)}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+
+          <mat-card>
+            <mat-card-content>
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <div fxFlex>
+                  <mat-form-field>
+                    <mat-label>Steps</mat-label>
+                    <input fxFlex matInput type="number" placeholder="Steps" [formControl]="stepControl" required>
+                    <mat-error *ngIf="stepControl.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-hint align="start">User can select in multiple of this amount</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+      </div>
+
+      <div style="padding: 10px"> Pricing scheme configuration
+        <mat-slide-toggle [formControl]="isSchemePresentControl" (change)="toggleScheme()">{{isSchemePresentControl.value ? 'Enable': 'Disable'}}</mat-slide-toggle>
+
+      </div>
+      <app-discount-selector
+          id="{{scheme.id}}"
+          (delete)="deleteScheme($event)"
+          (save)="saveScheme($event)"
+          *ngFor="let scheme of discountSchemes"
+      ></app-discount-selector>
+      <div fxLayout="row">
+        <span fxFlex="90"> </span>
+        <button fxFlex mat-raised-button color="accent" (click)="addScheme()" *ngIf="isSchemePresentControl.value">Add</button>
+      </div>
+<!--      <app-discou nt-selector></app-discount-selector>-->
+      <button mat-button type="submit" [disabled]="!productForm.valid">Submit</button>
+    </form>
+  </div>
+
 </ng-template>

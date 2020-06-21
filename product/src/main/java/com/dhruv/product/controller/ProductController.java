@@ -3,6 +3,13 @@ package com.dhruv.product.controller;
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.model.Product;
 import com.dhruv.product.services.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,15 +35,20 @@ public class ProductController {
         return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_IMPLEMENTED);
     }
 
+    @Operation(summary = "Get All Products list")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "products found",
+            		content = @Content(array = @ArraySchema(schema = @Schema(implementation = Product.class)))),
+    })
     @GetMapping()
-    public ResponseEntity getAllProduct() {
+    public ResponseEntity<List<Product>> getAllProduct() {
         LOGGER.debug("Finding all products");
 
         try {
-            return new ResponseEntity(service.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
         } catch (ProductException e) {
             LOGGER.error("No Product found in databse, returning empty set");
-            return new ResponseEntity(Arrays.asList(), HttpStatus.OK);
+            return new ResponseEntity<>(Arrays.asList(), HttpStatus.OK);
         }
     }
 
@@ -44,18 +58,27 @@ public class ProductController {
         try {
             Optional<Product> user =  service.findById(id);
             if (user.isPresent()) {
-                return new ResponseEntity(user.get(), HttpStatus.OK);
+                return new ResponseEntity<>(user.get(), HttpStatus.OK);
             } else {
-                return new ResponseEntity("No Product found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
         } catch (ProductException ex) {
             LOGGER.error("Error occurred while getting product for id: {}", id, ex);
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @Operation(summary = "Create new product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "product created")
+    })
     @PostMapping()
-    public ResponseEntity<String> create(@RequestBody Product product) {
+    public ResponseEntity<String> create(
+            @Parameter(description = "Product to add",
+            required = true,
+            schema = @Schema(implementation = Product.class))
+            @Valid
+            @RequestBody Product product) {
         LOGGER.info("creating product");
         try {
             service.save(product);

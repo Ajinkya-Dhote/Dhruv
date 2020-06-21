@@ -3,6 +3,9 @@ package com.dhruv.product.model;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,12 +14,30 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Product extends Stock {
+public class Product {
     @NonNull
     @Id
-    Integer id;
+    String id;
     String name;
-    Double price;
+    String image;
+
+    @Column(name="base_quantity")
+    Double baseQuantity;
+
+    @Column(name="base_quantity_unit")
+    Unit baseQuantityUnit;
+    @Column(name="base_quantity_price")
+    Double baseQuantityPrice;
+
+    @Column(name="min_quantity")
+    Double minQuantity;
+
+    @Column(name="max_quantity")
+    Double maxQuantity;
+    Double steps;
+
+    @Nullable
+    Scheme scheme[];
 
     @Column(name="date_first_available")
     @CreatedDate

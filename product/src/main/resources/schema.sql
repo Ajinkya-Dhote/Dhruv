@@ -1,11 +1,26 @@
 CREATE TABLE IF NOT EXISTS products (
-        id SERIAL NOT NULL PRIMARY KEY,
+        id varchar(100) NOT NULL PRIMARY KEY,
         name varchar(100) NOT NULL,
         type varchar(100),
+        image varchar(1000),
         description text,
-        price double precision NOT NULL,
+        base_quantity double precision NOT NULL,
+        base_quantity_unit varchar(100),
+        base_quantity_price double precision NOT NULL,
+        min_quantity double precision NOT NULL,
+        max_quantity double precision NOT NULL,
+        steps double precision NOT NULL,
         date_first_available timestamp DEFAULT now(),
         available BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS schemes (
+        id varchar(100) NOT NULL PRIMARY KEY,
+        product_id varchar(100) REFERENCES products(id) ON DELETE CASCADE,
+        comparator varchar(100),
+        discount double precision,
+        x double precision,
+        y double precision
 );
 
 CREATE TABLE IF NOT EXISTS stocks (

@@ -30,6 +30,11 @@ CREATE TABLE IF NOT EXISTS stocks (
         last_update timestamp DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS raw_products (
+        id varchar(100) NOT NULL PRIMARY KEY,
+        name varchar(100) NOT NULL,
+        quantity DOUBLE PRECISION NOT NULL DEFAULT 0.0
+);
 
 ------------------------------------------------------------------------------------------
 -- Create a default entry in stocks with quantity as zero

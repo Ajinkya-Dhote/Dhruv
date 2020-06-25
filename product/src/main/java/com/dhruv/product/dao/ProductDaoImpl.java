@@ -32,7 +32,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
         		try {
         			MapSqlParameterSource params = new MapSqlParameterSource();
         	        params.addValue("productId", p.getId());
-					List<Scheme> schemes = namedParamJdbcTemplate.query(this.getQuery("getAllSchemesForProducts"),
+					List<Scheme> schemes = namedParamJdbcTemplate.query(this.getQuery("getAllSchemesForProduct"),
 							params, new BeanPropertyRowMapper<>(Scheme.class));
 					p.setScheme(schemes.toArray(new Scheme[0]));
 				} catch (DataAccessException | ProductException e) {
@@ -47,7 +47,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
     }
 
     @Override
-    public Optional<Product> findById(int id) throws ProductException {
+    public Optional<Product> findById(String id) throws ProductException {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
         Product product = null;
@@ -118,7 +118,7 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
     }
 
     @Override
-    public void update(Integer id, String name, Double price, Double quantity) throws ProductException {
+    public void update(String id, String name, Double price, Double quantity) throws ProductException {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
         params.addValue("name", name);

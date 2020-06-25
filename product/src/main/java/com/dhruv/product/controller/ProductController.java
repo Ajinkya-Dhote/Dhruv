@@ -23,103 +23,112 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController("/")
+@RestController
+@RequestMapping("/product")
 public class ProductController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
-    @Autowired
-    private ProductService service;
+	@Autowired
+	private ProductService service;
 
-    @ExceptionHandler
-    public ResponseEntity<String> error() {
-        return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_IMPLEMENTED);
-    }
+	@ExceptionHandler
+	public ResponseEntity<String> error() {
+		return new ResponseEntity<>("Something went wrong", HttpStatus.NOT_IMPLEMENTED);
+	}
 
-    @Operation(summary = "Get All Products list")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "products found",
-            		content = @Content(array = @ArraySchema(schema = @Schema(implementation = Product.class)))),
-    })
-    @GetMapping()
-    public ResponseEntity<List<Product>> getAllProduct() {
-        LOGGER.debug("Finding all products");
+	@Operation(summary = "Get All Products list")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "products found", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Product.class)))), })
+	@GetMapping()
+	public ResponseEntity<List<Product>> getAllProduct() {
+		LOGGER.debug("Finding all products");
 
-        try {
-            return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-        } catch (ProductException e) {
-            LOGGER.error("No Product found in databse, returning empty set");
-            return new ResponseEntity<>(Arrays.asList(), HttpStatus.OK);
-        }
-    }
+		try {
+			return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+		} catch (ProductException e) {
+			LOGGER.error("No Product found in databse, returning empty set");
+			return new ResponseEntity<>(Arrays.asList(), HttpStatus.OK);
+		}
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Integer id) {
-        LOGGER.debug("getting product by id: {}", id);
-        try {
-            Optional<Product> user =  service.findById(id);
-            if (user.isPresent()) {
-                return new ResponseEntity<>(user.get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-        } catch (ProductException ex) {
-            LOGGER.error("Error occurred while getting product for id: {}", id, ex);
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	@Operation(summary = "Get Product for given id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "products found", content = @Content(schema = @Schema(implementation = Product.class))),
+			@ApiResponse(responseCode = "404", description = "unable to find product"),
+			@ApiResponse(responseCode = "500", description = "Interbal server error") })
+	@GetMapping("/{id}")
+	public ResponseEntity<Product> getProductById(
+			@Parameter(description = "product id", required = true, schema = @Schema(implementation = String.class)) @PathVariable("id") String id) {
+		LOGGER.debug("getting product by id: {}", id);
+		try {
+			Optional<Product> user = service.findById(id);
+			if (user.isPresent()) {
+				return new ResponseEntity<>(user.get(), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			}
+		} catch (ProductException ex) {
+			LOGGER.error("Error occurred while getting product for id: {}", id, ex);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-    @Operation(summary = "Create new product")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "product created")
-    })
-    @PostMapping()
-    public ResponseEntity<String> create(
-            @Parameter(description = "Product to add",
-            required = true,
-            schema = @Schema(implementation = Product.class))
-            @Valid
-            @RequestBody Product product) {
-        LOGGER.info("creating product");
-        try {
-            service.save(product);
-            return new ResponseEntity<>("Product created", HttpStatus.CREATED);
-        } catch (Exception ex) {
-            LOGGER.error("Error occurred while creating product", ex);
-            return new ResponseEntity("Error occurred while creating product", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+	@Operation(summary = "Create new product")
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "product created") })
+	@PostMapping()
+	public ResponseEntity<String> create(
+			@Parameter(description = "Product to add", required = true, schema = @Schema(implementation = Product.class)) @Valid @RequestBody Product product) {
+		LOGGER.info("creating product");
+		try {
+			service.save(product);
+			return new ResponseEntity<>("Product created", HttpStatus.CREATED);
+		} catch (Exception ex) {
+			LOGGER.error("Error occurred while creating product", ex);
+			return new ResponseEntity<String>("Error occurred while creating product",
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-    }
+	}
 
-    @PutMapping("/")
-    public ResponseEntity<String> update(@RequestBody Map<String, Object> params) {
-        LOGGER.info("Updating product");
-        try {
-            Integer id = (Integer) params.get("id");
-            String name = (String) params.get("name");
-            Double price = Double.parseDouble((String) params.get("price"));
-            Double quantity = Double.parseDouble((String) params.get("quantity"));
-            LOGGER.info("product: {} - {} - {} - {}", id, name, price, quantity);
-            service.update(id, name, price, quantity);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception ex) {
-            LOGGER.error("Error occurred while updating product", ex);
-            return new ResponseEntity("Error occurred while updating product", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	@Operation(summary = "Update existin product")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product updated"),
+			@ApiResponse(responseCode = "500", description = "Error occurred while updating product") })
+	@PutMapping("/")
+	public ResponseEntity<String> update(@RequestBody Map<String, Object> params) {
+		LOGGER.info("Updating product");
+		try {
+			String id = (String) params.get("id");
+			String name = (String) params.get("name");
+			Double price = Double.parseDouble((String) params.get("price"));
+			Double quantity = Double.parseDouble((String) params.get("quantity"));
+			LOGGER.info("product: {} - {} - {} - {}", id, name, price, quantity);
+			service.update(id, name, price, quantity);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception ex) {
+			LOGGER.error("Error occurred while updating product", ex);
+			return new ResponseEntity<String>("Error occurred while updating product",
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> update (@PathVariable int id) {
-        LOGGER.debug("delete product");
-        try {
-            boolean isDeleted = service.delete(id);
-            if (isDeleted) {
-                return new ResponseEntity<String>("Product deleted", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<String>("Product not deleted", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception ex) {
-            LOGGER.error("Error occurred while deleting product", ex);
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	@Operation(summary = "Delete existin product")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product deleted"),
+			@ApiResponse(responseCode = "404", description = "product not found"),
+			@ApiResponse(responseCode = "500", description = "Error occurred while updating product") })
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> update(
+			@Parameter(description = "product id", required = true, schema = @Schema(implementation = String.class)) @PathVariable int id) {
+		LOGGER.debug("delete product");
+		try {
+			boolean isDeleted = service.delete(id);
+			if (isDeleted) {
+				return new ResponseEntity<String>("Product deleted", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Product not deleted", HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception ex) {
+			LOGGER.error("Error occurred while deleting product", ex);
+			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

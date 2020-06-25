@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface ProductDao {
     List<Product> findAll() throws ProductException;
 
-    Optional<Product> findById(int id) throws ProductException;
+    Optional<Product> findById(String id) throws ProductException;
 
     void save(Product product) throws ProductException;
 
     boolean deleteById(int id) throws ProductException;
 
-    void update(Integer id, String name, Double price, Double quantity) throws ProductException;
+    void update(String id, String name, Double price, Double quantity) throws ProductException;
 }

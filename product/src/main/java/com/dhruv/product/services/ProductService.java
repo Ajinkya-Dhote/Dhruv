@@ -10,11 +10,11 @@ public interface ProductService {
 
     List<Product> findAll() throws ProductException;
 
-    Optional<Product> findById(Integer id) throws ProductException;
+    Optional<Product> findById(String id) throws ProductException;
 
     void save(Product product) throws ProductException;
 
     boolean delete(Integer id) throws  ProductException;
 
-    void update(Integer id, String name, Double price, Double quantity) throws ProductException;
+    void update(String id, String name, Double price, Double quantity) throws ProductException;
 }

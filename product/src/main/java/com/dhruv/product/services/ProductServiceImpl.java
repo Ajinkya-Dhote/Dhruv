@@ -29,8 +29,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findById(Integer id) throws ProductException {
-        if (id != null) {
+    public Optional<Product> findById(String id) throws ProductException {
+        if (id != null && !id.isEmpty()) {
             return productDao.findById(id);
         } else {
             throw new ProductException(true, "No product id passed");
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void update(Integer id, String name, Double price, Double quantity) throws ProductException {
+    public void update(String id, String name, Double price, Double quantity) throws ProductException {
         productDao.update(id, name, price, quantity);
     }
 }

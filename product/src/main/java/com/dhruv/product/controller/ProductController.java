@@ -23,6 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * 
+ * @author ajinkya
+ *
+ */
 @RestController
 @RequestMapping("/product")
 public class ProductController {

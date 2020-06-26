@@ -20,4 +20,6 @@ public interface RawProductDao {
 
 	RawProduct getbyId(String id) throws DataAccessException, ProductException;
 
+	boolean deleteById(String id) throws DataAccessException, ProductException;
+
 }

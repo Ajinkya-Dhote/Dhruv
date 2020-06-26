@@ -68,4 +68,15 @@ public class RawProductServiceImpl implements RawProductService {
 		return productDao.deleteById(id);
 	}
 
+	/**
+	 * Update raw product
+	 * @throws ProductException 
+	 * @throws DataAccessException 
+	 */
+	@Override
+	public void update(String id, String name, Double quantity) throws DataAccessException, ProductException {
+		productDao.update(id, name, quantity);
+		
+	}
+
 }

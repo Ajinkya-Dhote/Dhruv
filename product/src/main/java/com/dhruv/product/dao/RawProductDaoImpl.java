@@ -82,4 +82,16 @@ public class RawProductDaoImpl extends BaseDaoImpl implements RawProductDao {
         }
 	}
 
+	@Override
+	public void update(String id, String name, Double quantity) throws DataAccessException, ProductException {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+        params.addValue("name", name);
+        params.addValue("quantity", quantity);
+
+        int result = namedParamJdbcTemplate.update(this.getQuery("updateRawProduct"), params);
+        LOGGER.info("{} rows created in table with data: {}", result, params);
+		
+	}
+
 }

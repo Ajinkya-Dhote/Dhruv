@@ -18,4 +18,6 @@ public interface RawProductDao {
 
 	List<RawProduct> getAll();
 
+	RawProduct getbyId(String id) throws DataAccessException, ProductException;
+
 }

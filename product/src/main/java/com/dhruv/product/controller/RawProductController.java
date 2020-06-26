@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +41,32 @@ public class RawProductController {
 	@Autowired
 	RawProductService service;
 	
-	@Operation(summary = "Create Raw Product")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "raw producs found ")})
+	@Operation(summary = "Get all Raw Product")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "raw products found ")})
 	@GetMapping()
 	public ResponseEntity<List<RawProduct>> getAll() {
 		
 		return new ResponseEntity<List<RawProduct>>(service.getAll(), HttpStatus.OK);
+		
+	}
+	
+	@Operation(summary = "Get Raw Product by id")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "raw product found "),
+							@ApiResponse(responseCode = "404", description = "raw product not found "),
+							@ApiResponse(responseCode = "500", description = "Error while findind raw product")})
+	@GetMapping("/{id}")
+	public ResponseEntity<RawProduct> getbyId(@Parameter(description = "product id", required = true, schema = @Schema(implementation = String.class)) @PathVariable("id") String id) {
+		
+		RawProduct product;
+		try {
+			product = service.getbyId(id);
+		} catch (DataAccessException | ProductException e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		if (product == null) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<RawProduct>(product, HttpStatus.OK);
 		
 	}
 

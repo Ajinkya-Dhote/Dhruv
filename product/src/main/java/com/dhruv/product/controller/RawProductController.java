@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dhruv.product.Util.ProductException;
-import com.dhruv.product.model.Product;
 import com.dhruv.product.model.RawProduct;
 import com.dhruv.product.services.RawProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -61,6 +60,7 @@ public class RawProductController {
 		try {
 			product = service.getbyId(id);
 		} catch (DataAccessException | ProductException e) {
+			LOGGER.error("Cannot get raw product", e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		if (product == null) {
@@ -89,6 +89,24 @@ public class RawProductController {
 		} catch (DataAccessException | ProductException e) {
 			LOGGER.error("Cannot save raw product", e);
 			return new ResponseEntity<String>("Cannot save raw product", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteById(@PathVariable("id") String id) {
+		if (id == null) {
+			return new ResponseEntity<String>("No id passed", HttpStatus.NOT_FOUND);
+		}
+		try {
+			boolean result = service.deleteById(id);
+			if (result) {
+				return new ResponseEntity<String>("Raw product deleted", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("Raw product cannot deleted", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (DataAccessException | ProductException e) {
+			LOGGER.error("Cannot delete raw product", e);
+			return new ResponseEntity<String>("Raw product cannot deleted", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

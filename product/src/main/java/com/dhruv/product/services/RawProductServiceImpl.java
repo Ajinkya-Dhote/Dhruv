@@ -57,4 +57,15 @@ public class RawProductServiceImpl implements RawProductService {
 		return productDao.getbyId(id);
 	}
 
+	/**
+	 * Delete raw product for given id
+	 * @throws ProductException 
+	 * @throws DataAccessException 
+	 */
+	@Override
+	public boolean deleteById(String id) throws DataAccessException, ProductException {
+		LOGGER.debug("Delete raw product for given id: {}", id);
+		return productDao.deleteById(id);
+	}
+
 }

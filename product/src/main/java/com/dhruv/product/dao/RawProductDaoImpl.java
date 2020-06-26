@@ -66,4 +66,20 @@ public class RawProductDaoImpl extends BaseDaoImpl implements RawProductDao {
 	        return null;
 	}
 
+	@Override
+	public boolean deleteById(String id) throws DataAccessException, ProductException {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+
+        int result  = namedParamJdbcTemplate.update(this.getQuery("deleteRawProduct"), params);
+
+        if (result > 0) {
+            LOGGER.info("product with id: {} delete, #rows of rows deleted: {}", id, result);
+            return true;
+        } else {
+            LOGGER.info("No rows deleted");
+            return false;
+        }
+	}
+
 }

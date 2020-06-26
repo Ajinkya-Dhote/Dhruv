@@ -19,4 +19,6 @@ public interface RawProductService {
 
 	List<RawProduct> getAll();
 
+	RawProduct getbyId(String id) throws DataAccessException, ProductException;
+
 }

@@ -46,4 +46,15 @@ public class RawProductServiceImpl implements RawProductService {
 		return productDao.getAll();
 	}
 
+	/**
+	 * Get Raw product by id
+	 * @throws ProductException 
+	 * @throws DataAccessException 
+	 */
+	@Override
+	public RawProduct getbyId(String id) throws DataAccessException, ProductException {
+		LOGGER.debug("Gettign raw product by id");
+		return productDao.getbyId(id);
+	}
+
 }

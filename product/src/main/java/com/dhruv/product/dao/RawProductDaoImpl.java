@@ -2,11 +2,13 @@ package com.dhruv.product.dao;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -48,6 +50,20 @@ public class RawProductDaoImpl extends BaseDaoImpl implements RawProductDao {
 			LOGGER.error("Error while finding raw product", e);
 			return Arrays.asList();
 		}		
+	}
+
+	@Override
+	public RawProduct getbyId(String id) throws DataAccessException, ProductException {
+		 MapSqlParameterSource params = new MapSqlParameterSource();
+	        params.addValue("id", id);
+	        Product product = null;
+	        try {
+	            product = namedParamJdbcTemplate.queryForObject(this.getQuery("selectRawProductById"),
+	                    params, new BeanPropertyRowMapper<>(Product.class));
+	        } catch (EmptyResultDataAccessException ex) {
+	            LOGGER.warn("No product present for id: {}. returning empty result", id);
+	        }
+	        return null;
 	}
 
 }

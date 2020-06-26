@@ -22,4 +22,6 @@ public interface RawProductDao {
 
 	boolean deleteById(String id) throws DataAccessException, ProductException;
 
+	void update(String id, String name, Double quantity) throws DataAccessException, ProductException;
+
 }

@@ -6,7 +6,7 @@
   <groupId>com.dhruv</groupId>
   <artifactId>Dhruv</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0-alpha</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>Project Dhruv</name>
 
   <modules>
@@ -25,4 +25,26 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>make-bundles</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/assembly/dist.xml</descriptor>
+                        </descriptors>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>  

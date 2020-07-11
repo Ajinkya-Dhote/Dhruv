@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  dhruv-postgres:
+    image: "postgres:12"
+    restart: always
+    container_name: sms-postgres
+
+    environment:
+      - POSTGRES_DB=pratideen
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    
+    volumes:
+      - type: bind
+        source: ./dhruv-data/
+        target: /var/lib/postgresql/data/
+
+    ports:
+      - 5432:5432
+        
+  dhruv-disovery:
+    build: ./disocvery
+    container_name: dhruv-disovery
+
+    environment:
+      - DB_SERVER=sms-postgres
+      - POSTGRES_DB=sms
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 8082:8082
+
+  dhruv-gateway:
+    build: ./gateway
+    container_name: dhruv-gateway
+
+    environment:
+      - DB_SERVER=sms-postgres
+      - POSTGRES_DB=sms
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 8081:8081
+    links:
+      - dhruv-postgres
+          
+  dhruv-product:
+    build: ./product
+    container_name: dhruv-product
+
+    environment:
+      - DB_SERVER=sms-postgres
+      - POSTGRES_DB=sms
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 8084:8084
+    links:
+      - dhruv-postgres

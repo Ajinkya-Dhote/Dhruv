@@ -41,6 +41,7 @@
                         <descriptors>
                             <descriptor>src/assembly/dist.xml</descriptor>
                         </descriptors>
+						<outputDirectory>${project.basedir}/src/resources</outputDirectory>
                     </configuration>
                 </execution>
             </executions>

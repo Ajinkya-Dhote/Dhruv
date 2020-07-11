@@ -36,6 +36,14 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
           <scope>runtime</scope>
       </dependencySet>
   </dependencySets>
+
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}/src/resources</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+ 
   
   
 </assembly>

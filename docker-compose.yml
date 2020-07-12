@@ -4,7 +4,7 @@ services:
   dhruv-postgres:
     image: "postgres:12"
     restart: always
-    container_name: sms-postgres
+    container_name: dhruv-postgres
 
     environment:
       - POSTGRES_DB=pratideen
@@ -23,38 +23,36 @@ services:
     build: ./disocvery
     container_name: dhruv-disovery
 
-    environment:
-      - DB_SERVER=sms-postgres
-      - POSTGRES_DB=sms
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     ports:
       - 8082:8082
 
   dhruv-gateway:
     build: ./gateway
     container_name: dhruv-gateway
-
+    
     environment:
-      - DB_SERVER=sms-postgres
-      - POSTGRES_DB=sms
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - DISCOVERY_SERVER=dhruv-disovery
+      - DISCOVERY_PORT=8082
+
     ports:
       - 8081:8081
     links:
       - dhruv-postgres
+      - dhruv-disovery
           
   dhruv-product:
     build: ./product
     container_name: dhruv-product
 
     environment:
-      - DB_SERVER=sms-postgres
-      - POSTGRES_DB=sms
+      - DB_SERVER=dhruv-postgres
+      - POSTGRES_DB=pratideen
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - DISCOVERY_SERVER=dhruv-disovery
+      - DISCOVERY_PORT=8082
     ports:
       - 8084:8084
     links:
       - dhruv-postgres
+      - dhruv-disovery

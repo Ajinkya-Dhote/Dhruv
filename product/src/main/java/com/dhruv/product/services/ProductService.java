@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    List<Product> findAll() throws ProductException;
+    List<Product> findAll();
 
     Optional<Product> findById(String id) throws ProductException;
 
-    void save(Product product) throws ProductException;
+    Product save(Product product) throws ProductException;
 
     boolean delete(Integer id) throws  ProductException;
 

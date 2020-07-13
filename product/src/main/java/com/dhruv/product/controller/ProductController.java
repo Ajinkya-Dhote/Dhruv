@@ -46,6 +46,19 @@ public class ProductController {
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) throws ProductException {
 		return new ResponseEntity<>(service.save(product), HttpStatus.CREATED);
 	}
-
-
+	
+	@PutMapping
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws ProductException {
+		return new ResponseEntity<>(service.update(product), HttpStatus.OK);
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<Product> deleteProduct(Integer id) throws ProductException {
+		boolean result = service.delete(id);
+		if (result) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			throw new ProductException(true, "Unable to delete product");
+		}
+	}
 }

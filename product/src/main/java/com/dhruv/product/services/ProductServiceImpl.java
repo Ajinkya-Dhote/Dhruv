@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean delete(Integer id) throws ProductException {
         if (id != null) {
-//            productDao.deleteById(id);
+            repository.deleteById(id);
             return true;
         } else {
             LOGGER.error("id not passed for delete or is null, id which was passed: {}", id);
@@ -56,8 +56,19 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    @Override
-    public void update(String id, String name, Double price, Double quantity) throws ProductException {
-//        productDao.update(id, name, price, quantity);
-    }
+	@Override
+	public Product update(Product product) throws ProductException {
+		
+		if (product == null || product.getId() == null) {
+			throw new ProductException(true, "Cannot update product");
+		}
+		
+		if (repository.existsById(product.getId())) {
+			repository.deleteById(product.getId());
+			return repository.save(product);
+		} else {
+			throw new ProductException(true, "Cannot update product");
+		}
+		
+	}
 }

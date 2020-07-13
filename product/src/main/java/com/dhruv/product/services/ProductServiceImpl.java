@@ -1,6 +1,7 @@
 package com.dhruv.product.services;
 
 import com.dhruv.product.Util.ProductException;
+import com.dhruv.product.model.Category;
 import com.dhruv.product.model.Product;
 import com.dhruv.product.repository.ProductRepository;
 

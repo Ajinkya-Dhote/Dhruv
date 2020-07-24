@@ -1,0 +1,44 @@
+{
+	"name": "admin-ui5",
+	"version": "0.2.0",
+	"description": "Admin OpenUI5 app",
+	"private": true,
+	"scripts": {
+		"start": "ui5 serve",
+		"lint": "eslint webapp",
+		"karma": "karma start",
+		"karma-ci": "rimraf coverage && karma start karma-ci.conf.js",
+		"watch": "npm run karma",
+		"test": "npm run lint && npm run karma-ci",
+		"build": "ui5 build -a --clean-dest",
+		"build-self-contained": "ui5 build self-contained -a --clean-dest",
+		"serve-dist": "ws --compress -d dist",
+		"build-resources": "rimraf dist && ui5 build -a",
+		"browser-sync": "browser-sync start --proxy 'http://localhost:8080' --files 'webapp' --no-open",
+		"start-dist": "serve dist"
+	},
+	"dependencies": {
+		"local-sync": "^2.0.5",
+		"supervisor": "^0.12.0",
+		"ui5-middleware-livereload": "*",
+		"@openui5/sap.m": "1.60.27",
+		"@openui5/sap.ui.core": "1.60.27"
+	},
+	"devDependencies": {
+		"@ui5/cli": "^2.3.1",
+		"eslint": "^7.5.0",
+		"karma": "^4.4.1",
+		"karma-chrome-launcher": "^3.1.0",
+		"karma-coverage": "^2.0.2",
+		"karma-ui5": "^2.2.0",
+		"local-web-server": "^4.2.1",
+		"rimraf": "^3.0.2",
+		"browser-sync": "^2.26.3",
+		"serve": "^10.1.2"
+	},
+	"ui5": {
+		"dependencies": [
+			"ui5-middleware-livereload"
+		]
+	}
+}

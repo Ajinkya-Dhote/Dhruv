@@ -1,0 +1,7 @@
+specVersion: '2.1'
+metadata:
+  name: admin-ui5
+type: application
+framework:
+  name: OpenUI5
+  version: "1.60.27"

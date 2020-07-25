@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dhruv.product.Util.ProductException;
-import com.dhruv.product.model.Product;
-import com.dhruv.product.services.ProductService;
+import com.dhruv.product.model.BaseProduct;
+import com.dhruv.product.services.BaseProductService;
 
 /**
  * 
@@ -26,46 +26,46 @@ import com.dhruv.product.services.ProductService;
  *
  */
 @RestController
-@RequestMapping("/product")
-public class ProductController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
-    
+@RequestMapping("/product/base-product")
+public class BaseProductController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseProductController.class);
+
     @Autowired
-    private ProductService service;
+    private BaseProductService service;
 
     @GetMapping()
-    public ResponseEntity<List<Product>> getAllBaseProduct() throws ProductException {
-        LOGGER.debug("Getting all products");
+    public ResponseEntity<List<BaseProduct>> getAllBaseProduct() throws ProductException {
+        LOGGER.debug("Getting all base product");
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getBaseProductById(@PathVariable("id") Integer id) throws ProductException {
-        LOGGER.debug("Getting product for id: {}", id);
-        Product product = service.findById(id);
+    public ResponseEntity<BaseProduct> getBaseProductById(@PathVariable("id") Integer id) throws ProductException {
+        LOGGER.debug("Getting base product for id: {}", id);
+        BaseProduct product = service.findById(id);
         if (product != null) {
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @PostMapping()
-    public ResponseEntity<Product> create(@RequestBody Product product) throws ProductException {
-        LOGGER.debug("Creating base product: {}", product);
-        service.save(product);
+    public ResponseEntity<BaseProduct> create(@RequestBody BaseProduct baseProduct) throws ProductException {
+        LOGGER.debug("Creating base product: {}", baseProduct);
+        service.save(baseProduct);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    
+
     @PutMapping()
-    public ResponseEntity<Product> update(@RequestBody Product product) throws ProductException {
-        LOGGER.debug("Updating product: {}", product);
-        service.update(product);
+    public ResponseEntity<BaseProduct> update(@RequestBody BaseProduct baseProduct) throws ProductException {
+        LOGGER.debug("Updating base product: {}", baseProduct);
+        service.update(baseProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") Integer id) throws ProductException {
-        LOGGER.debug("Deleteing product for id: {}", id);
+        LOGGER.debug("Deleteing base product for id: {}", id);
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

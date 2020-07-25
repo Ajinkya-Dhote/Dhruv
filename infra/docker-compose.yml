@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  dhruv-postgres:
+    image: "postgres:12"
+    restart: always
+    container_name: dhruv-postgres
+
+    environment:
+      - POSTGRES_DB=pratideen
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    
+    volumes:
+      - type: bind
+        source: ./dhruv-data/
+        target: /var/lib/postgresql/data/
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+    ports:
+      - 5432:5432
+        
+  dhruv-disovery:
+    image: ajinkyadhote/dhruv-disocvery
+    container_name: dhruv-disovery
+
+    ports:
+      - 8082:8082
+
+  dhruv-gateway:
+    image: ajinkyadhote/dhruv-gateway
+    container_name: dhruv-gateway
+    
+    environment:
+      - DISCOVERY_SERVER=dhruv-disovery
+      - DISCOVERY_PORT=8082
+
+    ports:
+      - 8081:8081
+    links:
+      - dhruv-postgres
+      - dhruv-disovery
+          
+  dhruv-product:
+    image: ajinkyadhote/dhruv-product
+    container_name: dhruv-product
+
+    environment:
+      - DB_SERVER=dhruv-postgres
+      - POSTGRES_DB=pratideen
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DISCOVERY_SERVER=dhruv-disovery
+      - DISCOVERY_PORT=8082
+    ports:
+      - 8084:8084
+    links:
+      - dhruv-postgres
+      - dhruv-disovery

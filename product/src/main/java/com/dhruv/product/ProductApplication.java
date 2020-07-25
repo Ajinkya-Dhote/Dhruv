@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @OpenAPIDefinition(info = @Info(title = "Product APi", description = "API tp access product capapbilities"))
 public class ProductApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProductApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ProductApplication.class, args);
+    }
 
 }

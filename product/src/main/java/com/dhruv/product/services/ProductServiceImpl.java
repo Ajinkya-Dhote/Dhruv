@@ -1,74 +1,51 @@
 package com.dhruv.product.services;
 
-import com.dhruv.product.Util.ProductException;
-import com.dhruv.product.model.Category;
-import com.dhruv.product.model.Product;
-import com.dhruv.product.repository.ProductRepository;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.dhruv.product.Util.ProductException;
+import com.dhruv.product.dao.ProductDao;
+import com.dhruv.product.model.Product;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+    
     @Autowired
-    private ProductRepository repository;
-
+    private ProductDao productDao;
 
     @Override
-    public List<Product> findAll() {
-        return repository.findAll();
+    public List<Product> findAll() throws ProductException {
+        LOGGER.debug("Getting all products");
+        return productDao.findAll();
+    }
+    
+    @Override
+    public Product findById(Integer id) throws ProductException {
+        LOGGER.debug("Getting products for id: {}", id);
+        return productDao.findById(id);
     }
 
     @Override
-    public Optional<Product> findById(String id) throws ProductException {
-        if (id != null && !id.isEmpty()) {
-//            return productDao.findById(id);
-        	return null;
-        } else {
-            throw new ProductException(true, "No product id passed");
-        }
+    public void save(Product product) throws ProductException {
+        LOGGER.debug("Creating base product");
+        productDao.save(product);
     }
 
     @Override
-    public Product save(Product product) throws ProductException {
-        if (product != null) {
-        	return repository.save(product);
-        } else {
-            throw new ProductException(true, "No product info passed");
-        }
+    public void update(Product product) throws ProductException {
+        LOGGER.debug("Updating product");
+        productDao.update(product);
     }
 
     @Override
-    public boolean delete(Integer id) throws ProductException {
-        if (id != null) {
-            repository.deleteById(id);
-            return true;
-        } else {
-            LOGGER.error("id not passed for delete or is null, id which was passed: {}", id);
-            return false;
-        }
+    public void delete(Integer id) throws ProductException {
+        LOGGER.debug("Deleteing product for id: {}", id);
+        productDao.delete(id);
     }
 
-	@Override
-	public Product update(Product product) throws ProductException {
-		
-		if (product == null || product.getId() == null) {
-			throw new ProductException(true, "Cannot update product");
-		}
-		
-		if (repository.existsById(product.getId())) {
-			repository.deleteById(product.getId());
-			return repository.save(product);
-		} else {
-			throw new ProductException(true, "Cannot update product");
-		}
-		
-	}
 }

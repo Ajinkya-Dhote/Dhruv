@@ -1,53 +1,30 @@
 package com.dhruv.product.model;
 
-import lombok.*;
+import java.time.LocalDateTime;
 
-import org.apache.commons.lang3.builder.ToStringExclude;
-import org.springframework.data.annotation.CreatedDate;
+import javax.persistence.Column;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+/**
+ * 
+ * @author ajinkya
+ *
+ */
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
-@Entity
 public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-
-    String name;
-    String image;
-
-    Double steps;
-
-
-    @Column(name="date_first_available")
-    @CreatedDate
-    Date dateFirstAvailable;
-
-    boolean available;
-
-    String description;
-
-    // TODO: Create an Enum for product type
-    String type;
-    
-    String subtype;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    List<Category> categories = new ArrayList<>();
+    private Integer id;
+    private String name;
+    private String image;
+    private LocalDateTime dateFirstAvailable;
+    private boolean available;
+    private String description;
+    private Integer baseProductId;
 }

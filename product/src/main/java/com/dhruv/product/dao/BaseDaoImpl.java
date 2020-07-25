@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 
+/**
+ * 
+ * @author ajinkya
+ *
+ */
 @Component
 @PropertySource("classpath:/sql.properties")
 public class BaseDaoImpl {
@@ -31,8 +36,7 @@ public class BaseDaoImpl {
         try {
             return this.jdbcTemplate.getDataSource().getConnection();
         } catch (Exception e) {
-            LOGGER.error("System could not connect to database. Error while getting connection. ",
-                    e);
+            LOGGER.error("System could not connect to database. Error while getting connection. ", e);
             throw new ProductException(true, "System could not connect to database.");
         }
     }

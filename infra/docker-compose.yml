@@ -54,3 +54,11 @@ services:
     links:
       - dhruv-postgres
       - dhruv-disovery
+
+  dhruv-ui:
+    image: ajinkyadhote/dhruv-ui
+    container_name: dhruv-ui
+    ports:
+      - 80:80
+    links:
+      - dhruv-gateway

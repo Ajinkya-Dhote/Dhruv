@@ -1,42 +1,49 @@
-<app-greeting></app-greeting>
+<!-- Navbar (sit on top) -->
+<!-- <div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="#home" class="w3-bar-item w3-button">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> ABOUT</a>
+    <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
+  </div> -->
 
-<!-- <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center" style="padding: 10px" >
-    
-    <app-product-card 
-        fxFlex.xs="100" 
-        fxFlex.lg="30" 
-        *ngFor="let product of products"
-        [product]='product'></app-product-card>
-
-        
-   
+  <!-- Navbar on small screens -->
+  <!-- <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
+    <a href="#portfolio" class="w3-bar-item w3-button" onclick="toggleFunction()">PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">CONTACT</a>
+    <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+  </div>
 </div> -->
 
-<div fxLayout="column wrap" fxLayoutGap="10px" fxLayoutAlign="space-between streched" style="padding: 10px" >
-    <button fxFlex mat-stroked-button color="accent">Wheat Flour</button>
-    <button fxFlex mat-stroked-button color="accent">Wheat Flour</button>
-    <button fxFlex mat-stroked-button color="accent">Wheat Flour</button>
-    <button fxFlex mat-stroked-button color="accent">Wheat Flour</button>
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"> Pratideen </span>
+    <div>
+      <mat-form-field class="location" appearance="fill">
+         <span matPrefix>
+             <mat-icon aria-hidden="false" aria-label="Example home icon">location_on</mat-icon>
+         </span>
+        <mat-select>
+          <mat-option *ngFor="let city of cities" [(value)]="selectedCity">
+            {{city.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
 
-        
-   
-</div> 
-<!-- 
-<div >
-    <mat-grid-list cols="2" rowHeight="1:1">
-        <mat-grid-tile>
-            <button mat-stroked-button color="accent">Wheat Flour</button>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <button mat-stroked-button color="accent">Gram Flour</button>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <button mat-stroked-button color="accent">Jowari Flour</button>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <button mat-stroked-button color="accent">Bajari Flour</button>
-        </mat-grid-tile>
-      </mat-grid-list>
-       
-       
-</div> -->
+<div class="flex-container">
+    <div class="card card-1" *ngFor="let bproduct of baseProducts">
+            <h3>{{bproduct}}</h3>
+            <p>Explore {{bproduct}} categeories</p>
+   </div>
+</div>

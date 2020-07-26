@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -25,6 +26,7 @@
     "@angular/service-worker": "~9.0.6",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
+    "animate.css": "^4.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -10,7 +10,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 wget https://raw.githubusercontent.com/Ajinkya-Dhote/Dhruv/dev/infra/docker-compose.yml?token=ACUB6MRKROMTDP35RV2KZ2S7DQ3LK > docker-compose.yml
 docker login -u ajinkyadhote -p me@ajinkya16
 
-for project in disocvery gateway product
+for project in disocvery gateway product ui
 do
         docker pull ajinkyadhote/dhruv-$project
 done

@@ -4,7 +4,8 @@
 	"description": "Admin OpenUI5 app",
 	"private": true,
 	"scripts": {
-		"start": "ui5 serve",
+		"start:webapp": "ui5 serve",
+		"proxy_serve": "npm-run-all --parallel start:webapp proxy",
 		"lint": "eslint webapp",
 		"karma": "karma start",
 		"karma-ci": "rimraf coverage && karma start karma-ci.conf.js",
@@ -15,26 +16,33 @@
 		"serve-dist": "ws --compress -d dist",
 		"build-resources": "rimraf dist && ui5 build -a",
 		"browser-sync": "browser-sync start --proxy 'http://localhost:8080' --files 'webapp' --no-open",
-		"start-dist": "serve dist"
+		"start:dist": "serve dist",
+		"proxy": "node proxy.js"
 	},
 	"dependencies": {
+		"@openui5/sap.m": "1.60.27",
+		"@openui5/sap.ui.core": "1.60.27",
+		"grunt": "^1.2.1",
 		"local-sync": "^2.0.5",
 		"supervisor": "^0.12.0",
-		"ui5-middleware-livereload": "*",
-		"@openui5/sap.m": "1.60.27",
-		"@openui5/sap.ui.core": "1.60.27"
+		"ui5-middleware-livereload": "*"
 	},
 	"devDependencies": {
 		"@ui5/cli": "^2.3.1",
+		"browser-sync": "^2.26.3",
 		"eslint": "^7.5.0",
+		"express": "^4.17.1",
+		"fs": "0.0.1-security",
+		"http-proxy": "^1.18.1",
 		"karma": "^4.4.1",
 		"karma-chrome-launcher": "^3.1.0",
 		"karma-coverage": "^2.0.2",
 		"karma-ui5": "^2.2.0",
 		"local-web-server": "^4.2.1",
+		"npm-run-all": "^4.1.5",
 		"rimraf": "^3.0.2",
-		"browser-sync": "^2.26.3",
-		"serve": "^10.1.2"
+		"serve": "^10.1.2",
+		"cors-anywhere": "^0.4.1"
 	},
 	"ui5": {
 		"dependencies": [

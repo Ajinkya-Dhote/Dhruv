@@ -8,7 +8,7 @@ sap.ui.require([
 ], function (Opa5, AggregationLengthEquals, PropertyStrictEquals, Properties, EnterText, Press) {
 	"use strict";
 
-	var sViewName = "sap.ui.demo.todo.view.App";
+	var sViewName = "els.org.pratideen.view.App";
 	var sAddToItemInputId = "addTodoItemInput";
 	var sSearchTodoItemsInputId = "searchTodoItemsInput";
 	var sItemListId = "todoList";

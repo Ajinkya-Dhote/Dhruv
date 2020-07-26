@@ -22,32 +22,3 @@ CREATE TABLE IF NOT EXISTS category (
         quantity DOUBLE PRECISION NOT NULL DEFAULT 0.0,
         price DOUBLE PRECISION NOT NULL DEFAULT 0.0
 );
-
-
-------------------------------------------------------------------------------------------
--- Create a default entry in stocks with quantity as zero
-------------------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION insert_into_stocks()
-RETURNS TRIGGER AS
-$$
-    BEGIN
-        INSERT INTO stocks(product_id)
-        VALUES (NEW.id);
-
-        RETURN NEW;
-    END;
-$$
-LANGUAGE 'plpgsql';
-
-DROP TRIGGER IF EXISTS insert_into_stocks_trigger
-  ON products;
-
-CREATE TRIGGER insert_into_stocks_trigger
-    AFTER INSERT
-    ON products
-    FOR EACH ROW
-    EXECUTE PROCEDURE insert_into_stocks();
-
-------------------------------------------------------------------------------------------
--- Trigger for udating stocks end
-------------------------------------------------------------------------------------------

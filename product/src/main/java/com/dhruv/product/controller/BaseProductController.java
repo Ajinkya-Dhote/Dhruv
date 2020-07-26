@@ -26,7 +26,7 @@ import com.dhruv.product.services.BaseProductService;
  *
  */
 @RestController
-@RequestMapping("/product/base-product")
+@RequestMapping("/base-product")
 public class BaseProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseProductController.class);
 

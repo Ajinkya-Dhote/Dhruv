@@ -12,9 +12,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     
     volumes:
-      - type: bind
-        source: ./dhruv-data/
-        target: /var/lib/postgresql/data/
+      - ./dhruv-data:/var/lib/postgresql/data/
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
     ports:
@@ -38,7 +36,6 @@ services:
     ports:
       - 8081:8081
     links:
-      - dhruv-postgres
       - dhruv-disovery
           
   dhruv-product:

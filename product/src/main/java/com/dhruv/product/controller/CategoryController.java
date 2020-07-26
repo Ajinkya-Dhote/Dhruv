@@ -28,7 +28,7 @@ import com.dhruv.product.services.CategoryService;
  */
 
 @RestController
-@RequestMapping("/product/category")
+@RequestMapping("/category")
 public class CategoryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 

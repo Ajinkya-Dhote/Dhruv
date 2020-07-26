@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dhruv.product.Util.ProductException;
+import com.dhruv.product.model.MasterProduct;
 import com.dhruv.product.model.Product;
+import com.dhruv.product.services.MasterProductService;
 import com.dhruv.product.services.ProductService;
 
 /**
@@ -26,25 +28,28 @@ import com.dhruv.product.services.ProductService;
  *
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("")
 public class ProductController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
     
     @Autowired
     private ProductService service;
 
+    @Autowired
+    private MasterProductService masterProductService;
+
     @GetMapping()
-    public ResponseEntity<List<Product>> getAllBaseProduct() throws ProductException {
+    public ResponseEntity<List<MasterProduct>> getAllBaseProduct() throws ProductException {
         LOGGER.debug("Getting all products");
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(masterProductService.process(service.findAll()), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getBaseProductById(@PathVariable("id") Integer id) throws ProductException {
+    public ResponseEntity<MasterProduct> getBaseProductById(@PathVariable("id") Integer id) throws ProductException {
         LOGGER.debug("Getting product for id: {}", id);
         Product product = service.findById(id);
         if (product != null) {
-            return new ResponseEntity<>(product, HttpStatus.OK);
+            return new ResponseEntity<>(masterProductService.process(product), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

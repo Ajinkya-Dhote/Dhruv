@@ -34,7 +34,7 @@ sap.ui.define([
             var aData = jQuery.ajax({
                 type : "GET",
                 contentType : "application/xhtml+xml",
-                url : "http://localhost:8005/product/base-product",
+                url : "/proxy/api/product/base-product",
                 // dataType : "json",
                 success : function(data,textStatus, jqXHR) {
 					debugger;

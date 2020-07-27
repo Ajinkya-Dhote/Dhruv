@@ -61,3 +61,11 @@ services:
       - 80:80
     links:
       - dhruv-gateway
+
+  dhruv-ui5-admin:
+    build: ./ui5-admin
+    container_name: dhruv-ui5-admin
+    ports:
+      - 9000:80
+    links:
+      - dhruv-gateway

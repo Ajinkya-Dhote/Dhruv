@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SAPUI5 Data Binding Tutorial</title>
+	<script id="sap-ui-bootstrap"
+		src="../../../../../../../../../resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_belize"
+		data-sap-ui-libs="sap.m"
+		data-sap-ui-compatVersion="edge"
+		data-sap-ui-preload="async">
+	</script>
+	<script>
+		sap.ui.define([
+			"sap/m/Text"
+		], function (Text) {
+			"use strict";
+
+			// Attach an anonymous function to the SAPUI5 'init' event
+			sap.ui.getCore().attachInit(function () {
+				// Create a text UI element that displays a hardcoded text string
+				new Text({text: "Hi, my name is Harry Hawk"}).placeAt("content");
+			});
+		});
+	</script>
+</head>
+<body class="sapUiBody" id="content">
+</body>
+</html>

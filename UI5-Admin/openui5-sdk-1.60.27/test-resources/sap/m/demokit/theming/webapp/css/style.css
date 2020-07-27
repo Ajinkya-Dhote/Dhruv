@@ -1,0 +1,23 @@
+.myColorPreview {
+	display:block;
+	padding: 12px;
+}
+.myColorPreviewBorder {
+	border-width:1px;
+	border-style: solid;
+}
+
+.myTransparentPreview {
+	background: none;
+	background-image: url("Transparenz.jpg");
+}
+
+.alignment .sapMListTblHeader th{
+	vertical-align: middle;
+}
+.padding .sapMPanelContent {
+	padding: 0rem;
+}
+.sapMObjLNumberDiv .sapMObjectNumber .sapMObjectNumberText {
+	    font-size: 0.875rem;
+}

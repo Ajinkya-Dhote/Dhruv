@@ -13,7 +13,7 @@ services:
     
     volumes:
       - ./dhruv-data:/var/lib/postgresql/data/
-      - ./peoduct/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./product/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
     ports:
       - 5432:5432
@@ -57,6 +57,8 @@ services:
   dhruv-ui:
     build: ./ui
     container_name: dhruv-ui
+    volumes:
+       - ./ui/dist/pratideen:/usr/share/nginx/html
     ports:
       - 80:80
     links:

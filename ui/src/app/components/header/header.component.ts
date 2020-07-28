@@ -3,7 +3,7 @@ import { environment } from '@environments/environment';
 
 import { MediaTypeService } from  '@services/media-type.service';
 import { LanguageService } from '@services/language.service';
-
+import { LoaderService } from '@services/loader.service';
 import { DeviceType } from '@models/DeviceType';
 
 interface CITIES {
@@ -29,10 +29,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   deviceType: DeviceType;
   promptEvent:any;
+  isProgressBarVisible: boolean = false;
 
 
     constructor(private media: MediaTypeService,
-                private language: LanguageService) {
+                private language: LanguageService,
+                private loader: LoaderService) {
       window.addEventListener('beforeinstallprompt', event => {
         this.promptEvent = event;
       });
@@ -41,10 +43,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.title = environment.APP_NAME;
         this.media.type.subscribe(type => this.deviceType = type);
+        this.loader.loader$.subscribe(isVisible => this.isProgressBarVisible = isVisible);
+        });
     }
 
     ngOnDestroy() {
         this.media.type.unsubscribe();
+        // this.loader.loader$.unsubscribe();
     }
 
     onLanguageSelect(lang) {
@@ -54,5 +59,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     installPwa(): void {
       this.promptEvent.prompt();
     }
- 
+
 }

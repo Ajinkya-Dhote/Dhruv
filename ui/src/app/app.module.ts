@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -19,6 +19,9 @@ import { QuantitySelectComponent } from './common/components/quantity-select/qua
 import { CounterComponent } from './common/components/counter/counter.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { BaseProductComponent } from './components/base-product/base-product.component';
+
+import { DhruvUrlInterceptor } from "./app.interceptor";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -32,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GreetingComponent,
     ProductCardComponent,
     QuantitySelectComponent,
-    CounterComponent
+    CounterComponent,
+    BaseProductComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+      {
+           provide: HTTP_INTERCEPTORS, useClass: DhruvUrlInterceptor, multi: true
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

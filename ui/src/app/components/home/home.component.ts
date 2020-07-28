@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { BaseProductService } from '@services/base-product.service';
 import { ResourceService } from '@services/resource.service';
+
+import { BaseProduct } from "@models/BaseProduct";
 // import { GreetingComponent } from '@reusable-components/greeting/greeting.component';
 interface City {
   value: string;
@@ -23,20 +25,28 @@ export class HomeComponent implements OnInit {
     {value: 'pune', viewValue: 'Pune'}
   ];
 
-  baseProducts: any[] = ["Wheat", "Besan", "Jowar", "Bajari"];
+  baseProducts: BaseProduct[] = [];
 
 
 
-  constructor(private resource: ResourceService) { }
+    constructor(private resource: ResourceService, private service: BaseProductService) { }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
       this.selectedCity = "nagpur";
 
-    this.resource.getProductList()
-        .subscribe(products => {
-          console.log(products);
-          this.products = products;
+      // this.resource.getProductList()
+      //   .subscribe(products => {
+      //     console.log(products);
+      //     this.products = products;
+      //   });
+
+      console.log("getting base products");
+      this.service.getBaseProductList()
+        .subscribe(data => {
+            this.baseProducts = data;
         });
-  }
+    }
+
+
 
 }

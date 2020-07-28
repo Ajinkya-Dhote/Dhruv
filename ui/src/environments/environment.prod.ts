@@ -1,4 +1,6 @@
 export const environment = {
   APP_NAME: 'Application Name',
-  production: true
+  production: true,
+
+  baseProductListUrl: "/api/product/base-product"
 };

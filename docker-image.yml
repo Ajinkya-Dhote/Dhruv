@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        user:  ${{ secrets.DOCKER_PASSWORD}}
+        password: ${{ secrets.DOCKER_USERNAME}}
+      run: |
+        docker login -u $user -p $password
+    - name: Build the discovery server image
+      run: |
+        docker build ./disocvery --file Dockerfile --tag ajinkyadhote/dhruv-disocvery
+        docker build ./gateway --file Dockerfile --tag ajinkyadhote/dhruv-gateway
+        docker build ./product --file Dockerfile --tag ajinkyadhote/dhruv-product
+        docker build ./ui --file Dockerfile --tag ajinkyadhote/dhruv-ui
+    - name: docker push
+      run: |
+        docker push ajinkyadhote/dhruv-disocvery
+        docker push ajinkyadhote/dhruv-gateway
+        docker push ajinkyadhote/dhruv-product
+        docker push ajinkyadhote/dhruv-ui
+        

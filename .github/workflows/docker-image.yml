@@ -1,0 +1,88 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+    build-discovery-server:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  repository: ajinkyadhote/dhruv-disocvery
+                  dockerfile: ./disocvery/Dockerfile.prod
+                  path: ./disocvery/
+                  tags: latest
+
+    build-gateway-server:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  repository: ajinkyadhote/dhruv-gateway
+                  dockerfile: ./gateway/Dockerfile.prod
+                  path: ./gateway/
+                  tags: latest
+
+    build-product-server:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  repository: ajinkyadhote/dhruv-product
+                  dockerfile: ./product/Dockerfile.prod
+                  path: ./product/
+                  tags: latest
+
+    build-ui-server:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  repository: ajinkyadhote/dhruv-ui
+                  dockerfile: ./ui/Dockerfile.prod
+                  path: ./ui/
+                  tags: latest
+
+    build-ui5-admin-server:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  repository: ajinkyadhote/dhruv-ui5-admin
+                  dockerfile: ./ui5-admin/Dockerfile.prod
+                  path: ./ui5-admin/
+                  tags: latest

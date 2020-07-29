@@ -17,13 +17,13 @@ sap.ui.define([
 		onAfterRendering: function()
 		{
 			debugger;
-			var oDashModel = this.getJSONModel("DashBoardList.json");
+			var oDashModel = this.getClientJSONModel("DashBoardList.json");
 			this.getView().setModel(oDashModel,"oDashModel");
 		},
 
 		onListItemChange : function(evt)
 		{
-			this.getRouter().navTo("productdisp");
+			this.getRouter().navTo("productcreate");
 			
 		},
 

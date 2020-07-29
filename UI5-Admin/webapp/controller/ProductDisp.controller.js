@@ -34,16 +34,16 @@ sap.ui.define([
             var aData = jQuery.ajax({
                 type : "GET",
                 contentType : "application/xhtml+xml",
-                url : "/proxy/api/product/base-product",
+                url : "/api/product/base-product",
                 // dataType : "json",
                 success : function(data,textStatus, jqXHR) {
 					debugger;
                     oProdModel.setData({modelData : data}); 
-                    alert("success to post");
+                    sap.m.MessageToast.show("success to post");
 				},
 				failure : function(error) {
 					debugger;
-					alert("error to post");
+					sap.m.MessageToast.show("error to post");
 				}
 
             });

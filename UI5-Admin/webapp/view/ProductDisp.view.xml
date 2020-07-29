@@ -57,8 +57,9 @@
             </Panel>
         </content>
         <footer>
-            <Toolbar>
-                <Button text="{i18n>labelCreatProd}" press="onCreatePress" />
+           <Toolbar>
+             <ToolbarSpacer/>
+                <Button text="{i18n>labelCreatProd}" press="onCreatePress" type="Emphasized" />
             </Toolbar>
         </footer>
 

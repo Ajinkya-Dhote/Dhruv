@@ -13,10 +13,10 @@ xmlns="sap.m" xmlns:f="sap.f" controllerName="els.org.pratideen.controller.App" 
 		</content>
 		<footer>
 			<Toolbar>
-				<ToolbarSpacer/>
+				<!-- <ToolbarSpacer/>
 					<Button text="Edit" press="handleEditPress" />
 					<Button text="Busy state" press="handleBusyPress" />
-				<ToolbarSpacer/>
+				<ToolbarSpacer/> -->
 			</Toolbar>
 		</footer>
 			

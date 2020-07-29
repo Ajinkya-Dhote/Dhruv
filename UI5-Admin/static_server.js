@@ -3,13 +3,13 @@ var http = require("http"),
     httpProxy = require('http-proxy'),
     path = require("path"),
     fs = require("fs"),
-    port = process.argv[2] || 8888,
+    port = process.argv[2] || 8989,
     ////////////////////////////////////////////////////////////////////////////
     // Adjust this settings to your needs for proxying the backend requests   //
     ////////////////////////////////////////////////////////////////////////////
     proxy_cfg = {
       // the prefix you use to call your backend functions via the proxy server
-      prefix: "/proxy/",
+      prefix: "",
       // the host of your backend server
       host: "52.66.212.18",
       // port of your backend server
@@ -23,8 +23,10 @@ http.createServer(function(request, response) {
 
   var uri = url.parse(request.url).pathname,
     filename = path.join(process.cwd(), uri);
-
-  if (uri.indexOf(proxy_cfg.prefix) === 0) {
+    // console.log(proxy_cfg.prefix + uri + "  " +filename);
+    // console.log(uri.indexOf("/api"));
+  if (uri.indexOf("/api") === 0) {
+    // console.log("In If");
     proxy.on('error', function (err, req, res) {
       //console.log("backend error");
       //console.log(err);
@@ -43,7 +45,8 @@ http.createServer(function(request, response) {
     request.headers.host = proxy_cfg.host;
     // cut the prefix from the beginning of the url
     // request.url = request.url.slice(request.url.indexOf("/", 1));
-    request.url = request.url.slice(proxy_cfg.prefix.length);
+    // request.url = request.url.slice(proxy_cfg.prefix.length);
+    console.log(request.url);
     var target= 'http://' + proxy_cfg.host + (proxy_cfg.port ? ':' + proxy_cfg.port : '') + '/'
     console.log(target);
     proxy.web(request, response, {
@@ -54,7 +57,7 @@ http.createServer(function(request, response) {
       
     });
   } else {
-
+    // console.log("In Else");
     fs.exists(filename, function(exists) {
       if (!exists) {
         response.writeHead(404, {
@@ -85,4 +88,4 @@ http.createServer(function(request, response) {
   }
 }).listen(parseInt(port, 10));
 
-console.log("Static file server running at\n  => http://localhost:8888/webapp/index.html " + port + "/\nCTRL + C to shutdown");
+console.log("Static file server running at\n  => http://localhost:"+port +"/webapp/index.html " +  "/\nCTRL + C to shutdown");

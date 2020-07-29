@@ -1,0 +1,8 @@
+/* Strikes through the completed items */
+.savedCss .sapMBtnDisabled {
+    opacity: 0.8 !important;
+}
+.quantConfigPanelCss
+{
+    padding: 3rem 0rem 0rem 0rem !important;
+}

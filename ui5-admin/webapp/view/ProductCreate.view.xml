@@ -1,0 +1,143 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns="sap.m" controllerName="els.org.pratideen.controller.ProductCreate" displayBlock="true" class="sapUiSizeCompact">
+    <Page title="{i18n>labelCreatProd}" navButtonPress="navBack" showNavButton="true">
+        <content>
+            <Panel id="baseProdPanel" expanded="true" headerText="{i18n>baseSelect}">
+                <VBox>
+                    <HBox>
+                        <ComboBox id="baseProdCombo" items="{oBaseProdList>/results}" change="onBaseProdSelChange">
+                            <core:Item text="{oBaseProdList>name}" key="{oBaseProdList>id}"></core:Item>
+                        </ComboBox>
+                        <Button id="baseProdCrtBtn" icon="sap-icon://paper-plane" text="{i18n>newCreate}" press="onCreateNewBaseProd" type="Emphasized"/>
+                    </HBox>
+                    <Text text="{i18n>createnewMsg}"/>
+                </VBox>
+
+
+            </Panel>
+
+            <Panel id="productPanel" headerText="{i18n>labelCreatProdType}" visible="false">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="{i18n>labelCreatProdType}" titleStyle="H5"/>
+                            <ToolbarSpacer/>                           
+                            <Button id="addProdType" icon="sap-icon://add" tooltip="{i18n>labelAdd}" press="onAddProdType" type="Emphasized"/>
+                            <Button id="editProdType" icon="sap-icon://edit" tooltip="{i18n>labelEdit}" press="onEditProdType" enabled="{=${oProdTypebyBaseJSONMdl>/results}.length === 0 ? false : true}" type="Emphasized"/>
+                            <Button id="delProdType" icon="sap-icon://delete" tooltip="{i18n>labelDel}" press="onDelProdType" enabled="{=${oProdTypebyBaseJSONMdl>/results}.length === 0 ? false : true}" type="Emphasized"/>
+                            
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <Table id="prodTypeTable" items="{oProdTypebyBaseJSONMdl>/results}" selectionChange="onSelChgProdTypeTbl" mode="SingleSelectLeft" includeItemInSelection="true">
+                    <columns>
+                        <Column width="40%">
+                            <Text text="{i18n>ProdTypeName}*"></Text>
+                        </Column>
+                        <Column width="45%">
+                            <Text text="{i18n>ProdTypeDesc}"></Text>
+                        </Column>
+                        <Column width="25%">
+                            <Text text="{i18n>saveAction}"></Text>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Input value="{oProdTypebyBaseJSONMdl>name}" editable="{=${oProdTypebyBaseJSONMdl>baseProductId}.toString().indexOf('NEW') === -1 ? false : true}"/>
+                                <Input value="{oProdTypebyBaseJSONMdl>description}" editable="{=${oProdTypebyBaseJSONMdl>baseProductId}.toString().indexOf('NEW') === -1 ? false : true}"/>
+                                <HBox>
+                                    <!-- {=${oProdTypebyBaseJSONMdl>baseProductId} === 'NEW' ? false : true} -->
+                                    <Button icon="sap-icon://accept" type="Accept" text="Saved" visible="{=${oProdTypebyBaseJSONMdl>baseProductId}.toString().indexOf('NEW') === -1 ? true : false}" class="savedCss" enabled="false"/>
+                                    <Button icon="sap-icon://save" type="Reject" text="Save Now !" visible="{=${oProdTypebyBaseJSONMdl>baseProductId}.toString().indexOf('NEW') === -1 ? false : true}" press="saveNewProdType"/>
+                                </HBox>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+
+                <Panel id="quanConfPanel" class="quantConfigPanelCss" headerText="{i18n>QuantConfig}" expanded="true" expandable="true" visible="false">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <content>
+                                <Title text="{i18n>QuantConfig}" titleStyle="H5"/>
+                                <ToolbarSpacer/>                            
+                                <Button id="addQuantConfig" icon="sap-icon://add" tooltip="{i18n>labelAdd}" press="onAddQuantConfig" type="Emphasized"/>
+                                <Button id="editQuantConfig" icon="sap-icon://edit" tooltip="{i18n>labelEdit}" press="onEditQuantConfig" enabled="{=${oProdTypebyBaseJSONMdl>/results}.length === 0 ? false : true}" type="Emphasized"/>
+                                <Button id="delQuantConfig" icon="sap-icon://delete" tooltip="{i18n>labelDel}" press="onDelQuantConfig" enabled="{=${oProdTypebyBaseJSONMdl>/results}.length === 0 ? false : true}" type="Emphasized"/>
+                               
+                            </content>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <Table id="quantConfigTable" width="100%" items="{oCategorybyProdTypeJSONMdl>/results}" mode="SingleSelectLeft" includeItemInSelection="true">
+                        <columns>
+                            <Column width="20%">
+                                <Text text="{i18n>price}"></Text>
+                            </Column>
+                            <Column width="25%">
+                                <Text text="{i18n>quant}"></Text>
+                            </Column>
+                             <Column width="15%">
+                                <Text text="{i18n>quantUnit}"></Text>
+                            </Column>
+                            <Column width="25%">
+                                <Text text="{i18n>saveAction}"></Text>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Input value="{oCategorybyProdTypeJSONMdl>price}" editable="{=${oCategorybyProdTypeJSONMdl>id}.toString().indexOf('NEW') === -1 ? false : true}"/>
+                                    <Input value="{oCategorybyProdTypeJSONMdl>quantity}" editable="{=${oCategorybyProdTypeJSONMdl>id}.toString().indexOf('NEW') === -1 ? false : true}"/>
+                                    <Input value="{oCategorybyProdTypeJSONMdl>unit}" editable="false"/>
+                                    <HBox>                                       
+                                        <Button icon="sap-icon://accept" type="Accept" text="Saved" visible="{=${oCategorybyProdTypeJSONMdl>id}.toString().indexOf('NEW') === -1 ? true : false}" class="savedCss" enabled="false"/>
+                                        <Button icon="sap-icon://save" type="Reject" text="Save Now !" visible="{=${oCategorybyProdTypeJSONMdl>id}.toString().indexOf('NEW') === -1 ? false : true}" press="saveNewQuantPrice"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+
+
+                </Panel>
+
+                <Panel headerText="{i18n>SchemeConfig}" visible="false">
+                    <f:SimpleForm maxContainerCols="2" columnsL="4" columnsM="3" layout="ResponsiveGridLayout">
+                        <f:content>
+                            <VBox>
+                                <Label text="{i18n>SchemeCriteria}"></Label>
+                                <ComboBox>
+                                    <items>
+                                        <core:Item text="{i18n>lessthan}"></core:Item>
+                                        <core:Item text="{i18n>lessthanequal}"></core:Item>
+                                        <core:Item text="{i18n>inrange}"></core:Item>
+                                        <core:Item text="{i18n>greatthan}"></core:Item>
+                                        <core:Item text="{i18n>greatthanequal}"></core:Item>
+                                    </items>
+                                </ComboBox>
+                            </VBox>
+
+                            <VBox>
+                                <Label text="{i18n>ProdPrice}"></Label>
+                                <StepInput value="1" min="1" max="" width="100%" enabled="false" editable="false" description="kg" fieldWidth="40%" textAlign="Center" validationMode="LiveChange" change="onChange"/>
+                            </VBox>
+                        </f:content>
+                    </f:SimpleForm>
+
+                </Panel>
+            </Panel>
+        </content>
+        <footer>
+
+            <Toolbar>
+                <!-- <ToolbarSpacer/> -->
+                <!-- <Button text="{i18n>labelSubmit}" press="onProdSubmitPress" type="Emphasized" /> -->
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

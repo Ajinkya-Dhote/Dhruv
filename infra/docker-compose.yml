@@ -10,14 +10,14 @@ services:
       - POSTGRES_DB=pratideen
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    
+
     volumes:
       - ./dhruv-data:/var/lib/postgresql/data/
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
     ports:
       - 5432:5432
-        
+
   dhruv-disovery:
     image: ajinkyadhote/dhruv-disocvery
     container_name: dhruv-disovery
@@ -28,7 +28,7 @@ services:
   dhruv-gateway:
     image: ajinkyadhote/dhruv-gateway
     container_name: dhruv-gateway
-    
+
     environment:
       - DISCOVERY_SERVER=dhruv-disovery
       - DISCOVERY_PORT=8082
@@ -37,7 +37,7 @@ services:
       - 8081:8081
     links:
       - dhruv-disovery
-          
+
   dhruv-product:
     image: ajinkyadhote/dhruv-product
     container_name: dhruv-product
@@ -62,3 +62,9 @@ services:
       - 80:80
     links:
       - dhruv-gateway
+
+  dhruv-ui5-admin:
+    image: ajinkyadhote/dhruv-ui5-admin
+    container_name: dhruv-ui5-admin
+    ports:
+      - 9000:80

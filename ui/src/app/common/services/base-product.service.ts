@@ -14,4 +14,9 @@ export class BaseProductService {
     getBaseProductList() {
         return this.http.get<BaseProduct[]>(environment.baseProductListUrl);
     }
+
+    getProductListForBaseProduct(id) {
+        // return this.http.get<any>(environment.getProductListForBaseProductUrl + `/${id}`);
+        return this.http.get<any>(environment.getProductListForBaseProductUrl(id));
+    }
 }

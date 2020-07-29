@@ -58,7 +58,7 @@ services:
     build: ./ui
     container_name: dhruv-ui
     volumes:
-       - ./ui/dist:/usr/share/nginx/html
+       - ./ui/dist/pratideen:/usr/share/nginx/html
     ports:
       - 80:80
     links:

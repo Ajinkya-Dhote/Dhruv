@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseProduct } from "@models/BaseProduct";
+import { MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { QuantitySelectComponent } from '@reusable-components/quantity-select/quantity-select.component';
+import { BaseProductService } from '@services/base-product.service';
 
 @Component({
   selector: 'app-base-product',
@@ -8,15 +11,23 @@ import { BaseProduct } from "@models/BaseProduct";
 })
 export class BaseProductComponent implements OnInit {
 
-  baseProducts: any[] = ["Wheat", "Besan", "Jowar", "Bajari"];
-
-  constructor() { }
+  constructor(private _bottomSheet: MatBottomSheet,
+              private service: BaseProductService) { }
 
   @Input('base-product') baseProduct: BaseProduct;
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
+  openBottomSheet(id): void {
+
+      this.service.getProductListForBaseProduct(id)
+            .subscribe(data => {
+                this._bottomSheet.open(QuantitySelectComponent, {
+                    data: data
+                });
+            });
+        }
+
 
 }

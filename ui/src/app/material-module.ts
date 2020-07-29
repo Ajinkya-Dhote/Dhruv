@@ -13,6 +13,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+import {MatBadgeModule} from '@angular/material/badge';
 
 // import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
@@ -33,7 +35,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
         ReactiveFormsModule,
         MatChipsModule,
         MatMenuModule,
-        MatGridListModule
+        MatGridListModule,
+        MatListModule,
+        MatBadgeModule
     ]
 })
 

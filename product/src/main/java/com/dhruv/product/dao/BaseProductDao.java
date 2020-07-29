@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.model.BaseProduct;
+import com.dhruv.product.model.Product;
 
 public interface BaseProductDao {
 
@@ -16,5 +17,7 @@ public interface BaseProductDao {
     void update(BaseProduct baseProduct) throws ProductException;
 
     void delete(Integer id) throws ProductException;
+
+    List<Product> findAllProducts(Integer id) throws ProductException;
 
 }

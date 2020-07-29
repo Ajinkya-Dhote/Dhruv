@@ -44,7 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.title = environment.APP_NAME;
         this.media.type.subscribe(type => this.deviceType = type);
         this.loader.loader$.subscribe(isVisible => this.isProgressBarVisible = isVisible);
-        });
     }
 
     ngOnDestroy() {

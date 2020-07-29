@@ -6,7 +6,8 @@ export const environment = {
   APP_NAME: 'Application Name',
   production: false,
 
-  baseProductListUrl: "/api/product/base-product"
+  baseProductListUrl: "/api/product/base-product",
+  getProductListForBaseProductUrl: ((id) => `/api/product/base-product/${id}/product`)
 };
 
 /*

@@ -17,5 +17,4 @@ public interface ProductDao {
 
     void delete(Integer id) throws ProductException;
 
-
 }

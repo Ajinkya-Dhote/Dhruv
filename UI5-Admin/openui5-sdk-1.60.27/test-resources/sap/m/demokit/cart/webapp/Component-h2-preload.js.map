@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"sap/ui/demo/cart/Component-h2-preload.js",
-"sourceroot":".",
-"sources":["Component-dbg.js","manifest.json"],
-"names":["UIComponent","LocalStorageModel","jQuery","models","History","oEvent","sTitle","oCartModel","oHistory","oPrevHash"],
-"mappings":"AAAA,gBAAa,8BAAC,CACV,0BACA,2CACA,2BACA,gCACA,6BACJ,EAAG,SAASA,CAAW,CAAEC,CAAiB,CAAEC,CAAM,CAAEC,CAAM,CAAEC,CAAO,CAAE,CACpE,aAEA,OAAOJ,CAAW,qCAAsC,CAEvD,SAAU,CACT,SAAU,MACX,EAQA,KAAM,QAAS,EAAG,CACjBA,CAAW,2BAA4B,WAGvC,6CAA6CK,CAAM,CAAE,CACpD,IAAIC,CAAO,CAAED,CAAM,uBACnBH,CAAM,4BACL,cAAe,CAAEI,CAAM,CACxB,GACD,GAGA,IAAIC,CAAW,CAAE,IAAIN,CAAiB,iBAAkB,CACvD,YAAa,GACb,qBAAsB,EACvB,GACA,cAAcM,CAAU,CAAE,gBAG1B,cAAcJ,CAAM,qBAAsB,UAE1C,8BACD,EAEA,UAAW,QAAS,EAAG,CACtB,IAAIK,CAAS,CAAEJ,CAAO,eACtB,IAAIK,CAAU,CAAED,CAAQ,mBACxB,EAAG,CAACC,CAAU,GAAI,UAAW,CAC5B,sBACD,CAAE,IAAK,CACN,8BAA+B,GAAI,MACpC,CACD,CACD,GACD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-"x_com_sap_openui5_sections":[0,840,899,4623]
-}

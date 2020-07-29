@@ -24,6 +24,8 @@
 		"@openui5/sap.ui.core": "1.60.27",
 		"@openui5/sap.ui.unified": "1.60.27",
 		"@openui5/sap.f": "1.60.27",
+		"@openui5/sap.ui.layout" : "1.60.27",
+		"@openui5/themelib_sap_belize": "latest",
 		"grunt": "^1.2.1",
 		"local-sync": "^2.0.5",
 		"supervisor": "^0.12.0",

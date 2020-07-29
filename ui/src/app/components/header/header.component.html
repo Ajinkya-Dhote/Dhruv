@@ -1,53 +1,12 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" >
-      <span class="app-name"> {{ 'HOME.TITLE' | translate }} </span>
-      <mat-form-field class="example-full-width full-scree" *ngIf='deviceType === "lg"'>
-        <mat-label> {{ 'HOME.LOCATION' | translate }} </mat-label>
-            <mat-icon matPrefix class="app-icon">location_on</mat-icon>
-            <mat-select #selectedCity>
-                <mat-select-trigger>
-                    <span>{{selectedCity.value}}</span>
-                  </mat-select-trigger>
-                <mat-option *ngFor="let city of cities" [value]="city.value">
-                    <mat-icon>location_city</mat-icon>
-                    <span>{{city.viewValue}}</span>
-                </mat-option>
-              </mat-select>
-      </mat-form-field>
-      <span fxFlex></span>
-      <button  mat-icon-button *ngIf="promptEvent" (click)="installPwa()"> 
-        <mat-icon>get_app</mat-icon>
-      </button>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="language select">
-        <mat-icon>language</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onLanguageSelect('en')">
-          <span>English</span>
-        </button>
-        <button mat-menu-item (click)="onLanguageSelect('hi')">
-          <span>Hindi</span>
-        </button>
-        <button mat-menu-item (click)="onLanguageSelect('mr')">
-          <span>Marathi</span>
-        </button>
-      </mat-menu>
-      <mat-icon class="menu-icon">menu</mat-icon>
-    </mat-toolbar-row>
-  
-    <mat-toolbar-row *ngIf='deviceType !== "lg"'>
-        <mat-form-field class="example-full-width" >
-            <mat-label>Location</mat-label>
-            <mat-icon matPrefix class="app-icon">location_on</mat-icon>
-            <mat-select #selectedCity>
-                <mat-select-trigger>
-                    <span>{{selectedCity.value}}</span>
-                  </mat-select-trigger>
-                <mat-option *ngFor="let city of cities" [value]="city.value">
-                    <mat-icon>location_city</mat-icon>
-                    <span>{{city.viewValue}}</span>
-                </mat-option>
-              </mat-select>
-          </mat-form-field>
-    </mat-toolbar-row>
+<div class="fixed">
+  <mat-toolbar class="header">
+    <span class="w3-wide">Pratideen</span>
+
   </mat-toolbar>
+  <div [hidden]="!isProgressBarVisible">
+       <mat-progress-bar color="accent" mode="indeterminate" ></mat-progress-bar>
+  </div>
+
+
+
+</div>

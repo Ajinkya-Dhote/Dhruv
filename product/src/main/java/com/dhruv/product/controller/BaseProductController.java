@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.model.BaseProduct;
+import com.dhruv.product.model.MasterProduct;
 import com.dhruv.product.services.BaseProductService;
+import com.dhruv.product.services.MasterProductService;
 
 /**
  * 
@@ -32,11 +34,20 @@ public class BaseProductController {
 
     @Autowired
     private BaseProductService service;
+    
+    @Autowired
+    private MasterProductService masterProductService;
 
     @GetMapping()
     public ResponseEntity<List<BaseProduct>> getAllBaseProduct() throws ProductException {
         LOGGER.debug("Getting all base product");
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+    
+    @GetMapping("{id}/product")
+    public ResponseEntity<List<MasterProduct>> getAllProductsForBaseProduct(@PathVariable("id") Integer id) throws ProductException {
+        LOGGER.debug("Getting all product for base product");
+        return new ResponseEntity<>(masterProductService.process(service.findAllProducts(id)), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

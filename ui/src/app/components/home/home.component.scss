@@ -12,8 +12,8 @@
  //  background: rgb(2,0,36);
  // background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 
- background: rgb(2,0,36);
- background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(42,9,121,1) 18%, rgba(0,131,255,1) 100%);
+ background: #3b304f;
+ // background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(42,9,121,1) 18%, rgba(0,131,255,1) 100%);
   min-height: 100%;
 }
 
@@ -22,6 +22,8 @@
     padding: 10px;
     color: red
 }
+
+
 
 ::ng-deep .mat-select {
     text-align: center;
@@ -36,74 +38,13 @@
 
 .flex-container {
   display: flex;
-  // flex-wrap: wrap;
-  justify-content: space-between;
-  overflow-x: auto;
-  overflow-y: hidden;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  // overflow-x: auto;
+  // overflow-y: hidden;
 }
 
 
-.base-product {
-    margin: 10px 30px;
-}
-.card{
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-  padding: 14px 80px 18px 36px;
-  cursor: pointer;
-  margin: 10px 10px;
-}
-
-.card:hover{
-     transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
-
-.card h3 {
-  font-weight: 600;
-}
-
-.card img {
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  max-height: 120px;
-}
-.card-1{
-  background-image: url(/assets/images/wheat.png);
-      background-repeat: no-repeat;
-    background-position: right;
-    background-size: 80px;
-}
-@media(max-width: 990px){
-  .card{
-    margin: 20px;
-  }
-}
-
-.track {
-    background-image: url("/assets/images/truck.png");
-    background-repeat: no-repeat;
-    background-position: left;
-    height: 300px;
-    width: 100%;
-}
-
-/* Second image (Portfolio) */
-.bgimg-2 {
-  background-image: url("/w3images/parallax2.jpg");
-  min-height: 400px;
-}
-
-/* Third image (Contact) */
-.bgimg-3 {
-  background-image: url("/w3images/parallax3.jpg");
-  background-position: left;
-  min-height: 400px;
-  width: 25%;
-}
 
 .w3-wide {letter-spacing: 10px;}
 .w3-hover-opacity {cursor: pointer;}

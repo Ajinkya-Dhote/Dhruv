@@ -11,10 +11,21 @@
     margin: 8px;
     width: 100%;
   }
-  
+
 
   app-counter {
     display: block;
     width: 95px;
     font-size: 20px
-  }
+}
+
+.price-card {
+    margin: 2px;
+}
+
+.categories-card {
+    display: flex !important;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    // overflow-x: auto;
+}

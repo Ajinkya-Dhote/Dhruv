@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.model.BaseProduct;
+import com.dhruv.product.model.Product;
 
 /**
  * 
@@ -27,6 +28,20 @@ public class BaseProductDaoImpl extends BaseDaoImpl implements BaseProductDao {
         try {
             return namedParamJdbcTemplate.query(this.getQuery("getAllBaseProduct"),
                     new BeanPropertyRowMapper<>(BaseProduct.class));
+        } catch (DataAccessException | ProductException e) {
+            LOGGER.error("Unable to find base-product", e);
+            throw new ProductException(true, "Unable to find base-product");
+        }
+    }
+    
+    @Override
+    public List<Product> findAllProducts(Integer id) throws ProductException {
+        LOGGER.debug("Getting all products for base-products");
+        try {
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("baseProductId", id);
+            return namedParamJdbcTemplate.query(this.getQuery("getAllProductsForBaseProduct"), params,
+                    new BeanPropertyRowMapper<>(Product.class));
         } catch (DataAccessException | ProductException e) {
             LOGGER.error("Unable to find base-product", e);
             throw new ProductException(true, "Unable to find base-product");

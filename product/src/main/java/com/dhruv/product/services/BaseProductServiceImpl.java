@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dhruv.product.Util.ProductException;
 import com.dhruv.product.dao.BaseProductDao;
 import com.dhruv.product.model.BaseProduct;
+import com.dhruv.product.model.Product;
 
 /**
  * 
@@ -51,6 +52,12 @@ public class BaseProductServiceImpl implements BaseProductService {
     public void delete(Integer id) throws ProductException {
         LOGGER.debug("Deleteing base product for id: {}", id);
         baseProductDao.delete(id);
+    }
+
+    @Override
+    public List<Product> findAllProducts(Integer id) throws ProductException {
+        LOGGER.debug("Getting all base-products");
+        return baseProductDao.findAllProducts(id);
     }
 
 }

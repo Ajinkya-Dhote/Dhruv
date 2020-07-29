@@ -1,0 +1,111 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "els.org.pratideen",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}"
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "1.60.27",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.f": {},
+				"sap.ui.unified": {}				
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"rootView": {
+			"viewName": "els.org.pratideen.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "els.org.pratideen.i18n.i18n",
+					"supportedLocales": ["en", "de"],
+					"fallbackLocale": "en"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/styles.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "els.org.pratideen.view",				
+				"controlId": "idAppControl",
+				"controlAggregation" : "pages",
+				"async":true
+			},
+		
+		"routes": [
+			{
+				"pattern": "",
+				"name": "app",
+				"target": [
+					"app"
+				]
+			},
+			{
+				"pattern": "Product",
+				"name": "productdisp",
+				"target": [
+					"productdisp"
+						]
+			},
+			{
+				"pattern": "ProdCreate",
+				"name": "productcreate",
+				"target": [
+					"productcreate"
+						]
+			}
+		],
+			"targets": {
+				"app": {
+					"viewName": "App",
+					"viewLevel": 1
+				},
+				"productdisp": {
+					"viewName": "ProductDisp",
+					"viewLevel": 2
+				},
+				"productcreate": {
+					"viewName": "ProductCreate",
+					"viewLevel": 2
+				}
+			}
+		}
+	}
+}

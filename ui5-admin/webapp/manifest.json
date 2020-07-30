@@ -9,8 +9,8 @@
 	"sap.ui": {
 		"technology": "UI5",
 		"icons": {
-			"icon": "sap-icon://detail-view",
-			"favIcon": "",
+			"icon": "sap-icon://accept",
+			"favIcon": "sap-icon://accept",
 			"phone": "",
 			"phone@2": "",
 			"tablet": "",
@@ -57,7 +57,12 @@
 				{
 					"uri": "css/styles.css"
 				}
-			]
+			],
+				"icons": [
+					{
+						"uri": "icons/"
+					}
+				]
 		},
 		"routing": {
 			"config": {

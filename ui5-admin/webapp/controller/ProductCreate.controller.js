@@ -1,12 +1,8 @@
 sap.ui.define([
-	"sap/ui/Device",
-	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator",
-	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/mvc/Controller",		
 	"els/org/pratideen/controller/BaseController",
 	"sap/m/MessageBox"
-], function (Device, Controller, Filter, FilterOperator, JSONModel, BaseController, MessageBox) {
+], function (Controller, BaseController, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("els.org.pratideen.controller.ProductCreate", {
@@ -17,11 +13,7 @@ sap.ui.define([
 			this.getBaseProdList(function (callbackdata) {
 				that.oBaseProdComboItems = callbackdata;
 			});
-
-			
-
 		},
-
 
 		onRouteMatched: function (oEvent) {
 			var oParameters = oEvent.getParameters();
@@ -30,8 +22,6 @@ sap.ui.define([
 			}
 			this.getView().byId("productPanel").setVisible(false);
 			this.getView().byId("quanConfPanel").setVisible(false);
-
-
 		},
 
 		onCreateNewBaseProd: function (oEvent) {
@@ -39,8 +29,7 @@ sap.ui.define([
 			var that = this;
 
 			var sBaseProdName = that.getView().byId("baseProdCombo").getValue();
-			if(!sBaseProdName)
-			{
+			if (!sBaseProdName) {
 				sap.m.MessageToast.show("Empty Value !", that.oMsgToastProperties)
 				return;
 			}
@@ -63,14 +52,11 @@ sap.ui.define([
 				//   "Accept" : "application/atom+xml;type=feed; charset=utf-8" 
 				//"application/atom+xml,application/xml,application/atomsvc+xml" //"application/json",	//Content-Types that are acceptable for the response
 			};
-			$.ajax({
-				// async: true, // Async by default is set to “true” load the script asynchronously  
-				// URL to post data into sharepoint list  
+			$.ajax({				
 				url: "/api/product/base-product",
-				type: "POST", //Specifies the operation to create the list item 		
+				type: "POST", 		
 				headers: headers,
-				data: oSendJSON,
-				// dataType:"json",
+				data: oSendJSON,				
 				success: function (data, textStatus, respoonse) {
 					debugger;
 					that.getView().byId("productPanel").setVisible(true);
@@ -85,19 +71,13 @@ sap.ui.define([
 								break;
 							}
 						}
-
-
-					});
-					// that.getView().byId("baseProdCombo").setValue(sBaseProdName);
-					// that.BaseProductId = oEvent.getParameter("selectedItem").getProperty("key");
+					});				
 				},
 				error: function (error) {
 					sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error), that.oMsgToastProperties);
 					that.getView().byId("productPanel").setVisible(false);
 					that.BaseProductId = "";
-
 				}
-
 			});
 
 		},
@@ -116,63 +96,11 @@ sap.ui.define([
 					this.getProdTypeList(this.BaseProductId);
 					break;
 				}
-
 			}
 			if (!flag) {
 				this.getView().byId("productPanel").setVisible(false);
 			}
-
-
-		},	
-
-		// onCreateNewProdType: function (oEvent) {
-		// 	debugger;
-		// 	var that = this;
-		// 	var sProdTypeName = this.getView().byId("inputProdtypeName").getValue();
-		// 	var sProdTypeDet = this.getView().byId("inputProdtypeDet").getValue();
-
-		// 	if(!sProdTypeName)
-		// 	{
-		// 		sap.m.MessageToast.show("Empty Value !")
-		// 		return;
-		// 	}
-
-		// 	var oSendJSON = {
-		// 		name: sProdTypeName,
-		// 		description: sProdTypeDet,
-		// 		dateFirstAvailable: that.getFormattedDate(),
-		// 		available: true,
-		// 		baseProductId: parseInt(that.BaseProductId)
-		// 	};
-		// 	oSendJSON = JSON.stringify(oSendJSON);
-		// 	var headers = {
-		// 		// "X-Requested-With" : "XMLHttpRequest",
-		// 		"Content-Type": "application/json",
-		// 		//   "X-CSRF-Token" : "Fetch",
-		// 		//   "Accept" : "application/atom+xml;type=feed; charset=utf-8" 
-		// 		//"application/atom+xml,application/xml,application/atomsvc+xml" //"application/json",	//Content-Types that are acceptable for the response
-		// 	};
-		// 	$.ajax({
-		// 		// async: true, // Async by default is set to “true” load the script asynchronously  
-		// 		// URL to post data into sharepoint list  
-		// 		url: "/api/product/base-product",
-		// 		type: "POST", //Specifies the operation to create the list item 		
-		// 		headers: headers,
-		// 		data: oSendJSON,
-		// 		// dataType:"json",
-		// 		success: function (data, textStatus, respoonse) {
-		// 			debugger;
-		// 			sap.m.MessageToast.show("Product Type Created for Base Product " + that.sBaseProdName);
-		// 		},
-		// 		error: function (error) {
-		// 			sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error));
-		// 			that.getView().byId("productPanel").setVisible(false);
-		// 			that.BaseProductId = null;
-		// 		}
-
-		// 	});
-
-		// },
+		},
 
 		onAddProdType: function (oEvent) {
 			debugger;
@@ -187,8 +115,7 @@ sap.ui.define([
 			});
 			oTblMdl.updateBindings(true);
 			oEvent.getSource().setEnabled(false);
-
-		},		
+		},
 
 		onEditProdType: function (oEvent) {
 			debugger;
@@ -215,7 +142,7 @@ sap.ui.define([
 			var oTbl = this.getView().byId("prodTypeTable");
 			var oSelectedItem = oTbl.getSelectedItem();
 			if (!oSelectedItem) {
-				sap.m.MessageToast.show("Kindly Select Product Type Record for Delete" , that.oMsgToastProperties);
+				sap.m.MessageToast.show("Kindly Select Product Type Record for Delete", that.oMsgToastProperties);
 				return;
 			}
 
@@ -240,24 +167,18 @@ sap.ui.define([
 								debugger;
 								that.getProdTypeList(that.BaseProductId);
 								sap.m.MessageToast.show("Product Type deleted for Base Product - " + that.sBaseProdName
-								, that.oMsgToastProperties);
+									, that.oMsgToastProperties);
+								that.getView().byId("quanConfPanel").setVisible(false);
 							},
 							error: function (error) {
 								sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error)
-								, that.oMsgToastProperties);
+									, that.oMsgToastProperties);
 							}
 						});
-
-
-
 					}
 				}
 			}
 			);
-
-
-
-
 		},
 
 		saveNewProdType: function (oEvent) {
@@ -275,8 +196,7 @@ sap.ui.define([
 			var sRequestType = sManipulatedItemId.replace("NEW", "") === "" ? "POST" : "PUT";
 			var sMsg = sManipulatedItemId.replace("NEW", "") === "" ? "created" : "updated";
 
-			if(!oTblModelResutls[sIndex].name)
-			{
+			if (!oTblModelResutls[sIndex].name) {
 				sap.m.MessageToast.show("Empty Value !", that.oMsgToastProperties)
 				return;
 			}
@@ -296,24 +216,21 @@ sap.ui.define([
 			var headers = {
 				"Content-Type": "application/json"
 			};
-			$.ajax({
-				// async: true, // Async by default is set to “true” load the script asynchronously 
+			$.ajax({				
 				url: "/api/product/",
 				type: sRequestType, //Specifies the operation to create the list item 		
 				headers: headers,
-				data: oSendJSON,
-				// dataType:"json",
+				data: oSendJSON,			
 				success: function (data, textStatus, respoonse) {
 					debugger;
 					that.getView().byId("addProdType").setEnabled(true);
 					that.getView().byId("editProdType").setEnabled(true);
 					that.getProdTypeList(that.BaseProductId);
 					sap.m.MessageToast.show("Product Type " + sMsg + " for Base Product - " + that.sBaseProdName
-					, that.oMsgToastProperties);
+						, that.oMsgToastProperties);
 				},
 				error: function (error) {
 					sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error), that.oMsgToastProperties,);
-
 				}
 			});
 
@@ -321,10 +238,9 @@ sap.ui.define([
 
 		onSelChgProdTypeTbl: function (oEvent) {
 			debugger;
-			var that=this;
+			var that = this;
 			var oTblRow = oEvent.getParameter("listItem");
-			var oTbl = oTblRow.getParent();
-			// oTbl.setSelectedItem(oTblRow);
+			var oTbl = oTblRow.getParent();		
 			var sIndex = oTblRow.getBindingContextPath().split("/")[2];
 			var oTblModel = oTbl.getModel("oProdTypebyBaseJSONMdl");
 			var oTblModelResutls = oTblModel.getData().results;
@@ -338,21 +254,19 @@ sap.ui.define([
 
 		onAddQuantConfig: function (oEvent) {
 			debugger;
-			var that=this;
+			var that = this;
 			var oTbl = this.getView().byId("quantConfigTable");
 			var oTblMdl = oTbl.getModel("oCategorybyProdTypeJSONMdl");
-			var oTblJSON = oTblMdl.getProperty("/results");
-			// var oItemsLen = oTblJSON.length;
+			var oTblJSON = oTblMdl.getProperty("/results");			
 			oTblJSON.push({
 				price: "",
 				quantity: "1",
-				unit:"KG",
+				unit: "KG",
 				id: "NEW"
 			});
 			oTblMdl.updateBindings(true);
 			oEvent.getSource().setEnabled(false);
-
-		},		
+		},
 
 		onEditQuantConfig: function (oEvent) {
 			debugger;
@@ -388,7 +302,6 @@ sap.ui.define([
 			var oTblModel = oTbl.getModel("oCategorybyProdTypeJSONMdl");
 			var oTblModelResutls = oTblModel.getData().results;
 			var sQuantPriceIndex = oTblModelResutls[sIndex].id;
-			
 
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.warning(
@@ -401,28 +314,20 @@ sap.ui.define([
 						$.ajax({
 							url: "/api/product/category/" + sQuantPriceIndex,
 							type: "DELETE", //Specifies the operation to create the list item 		
-							// headers : headers,
 							success: function (data, textStatus, respoonse) {
 								debugger;
 								that.getProdPriceCategories(that.sProdTypeID);
 								sap.m.MessageToast.show("Quantity-Price deleted for Product Type - "
-								 + that.sBaseProdName + " - "+ that.sProdTypeName, that.oMsgToastProperties);
+									+ that.sBaseProdName + " - " + that.sProdTypeName, that.oMsgToastProperties);
 							},
 							error: function (error) {
 								sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error), that.oMsgToastProperties);
 							}
 						});
-
-
-
 					}
 				}
 			}
 			);
-
-
-
-
 		},
 
 		saveNewQuantPrice: function (oEvent) {
@@ -440,8 +345,7 @@ sap.ui.define([
 			var sRequestType = sManipulatedItemId.replace("NEW", "") === "" ? "POST" : "PUT";
 			var sMsg = sManipulatedItemId.replace("NEW", "") === "" ? "created" : "updated";
 
-			if(!oTblModelResutls[sIndex].price || !oTblModelResutls[sIndex].quantity)
-			{
+			if (!oTblModelResutls[sIndex].price || !oTblModelResutls[sIndex].quantity) {
 				sap.m.MessageToast.show("Empty Value !", that.oMsgToastProperties)
 				return;
 			}
@@ -450,7 +354,7 @@ sap.ui.define([
 				productId: that.sProdTypeID,
 				unit: oTblModelResutls[sIndex].unit,
 				quantity: oTblModelResutls[sIndex].quantity,
-				price:  oTblModelResutls[sIndex].price				
+				price: oTblModelResutls[sIndex].price
 			};
 			if (sRequestType === "PUT") {
 				oSendJSON.id = parseInt(sManipulatedItemId.replace("NEW", ""));
@@ -459,28 +363,24 @@ sap.ui.define([
 			var headers = {
 				"Content-Type": "application/json"
 			};
-			$.ajax({
-				// async: true, // Async by default is set to “true” load the script asynchronously 
+			$.ajax({				
 				url: "/api/product/category/",
 				type: sRequestType, //Specifies the operation to create the list item 		
 				headers: headers,
-				data: oSendJSON,
-				// dataType:"json",
+				data: oSendJSON,				
 				success: function (data, textStatus, respoonse) {
 					debugger;
 					that.getView().byId("addQuantConfig").setEnabled(true);
 					that.getView().byId("editQuantConfig").setEnabled(true);
 					that.getProdPriceCategories(that.sProdTypeID);
-					sap.m.MessageToast.show("Quantity-Price " + sMsg + 
-					" for Product - " + that.sBaseProdName + " - " + that.sProdTypeName , that.oMsgToastProperties);
+					sap.m.MessageToast.show("Quantity-Price " + sMsg +
+						" for Product - " + that.sBaseProdName + " - " + that.sProdTypeName, that.oMsgToastProperties);
 				},
 				error: function (error) {
-					sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error) , that.oMsgToastProperties);
-
+					sap.m.MessageToast.show("Something went wrong - " + JSON.stringify(error), that.oMsgToastProperties);
 				}
 			});
 		}
-
 	});
 
 });

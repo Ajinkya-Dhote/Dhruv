@@ -17,7 +17,9 @@
 		"build-resources": "rimraf dist && ui5 build -a",
 		"browser-sync": "browser-sync start --proxy 'http://localhost:8080' --files 'webapp' --no-open",
 		"start:dist": "serve dist",
-		"proxy": "node static_server.js"
+		"proxy": "node static_server.js",
+		"copy-resource" : "node CopyFile.js",
+		"buildWithResources": "npm run build && npm run copy-resource"
 	},
 	"dependencies": {
 		"@openui5/sap.m": "1.60.27",

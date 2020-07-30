@@ -18,7 +18,7 @@
 		"browser-sync": "browser-sync start --proxy 'http://localhost:8080' --files 'webapp' --no-open",
 		"start:dist": "serve dist",
 		"proxy": "node static_server.js",
-		"copy-resource" : "node CopyFile.js",
+		"copy-resource": "node CopyFile.js",
 		"buildWithResources": "npm run build && npm run copy-resource"
 	},
 	"dependencies": {

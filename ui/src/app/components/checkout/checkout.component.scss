@@ -1,6 +1,8 @@
 mat-vertical-stepper {
     position: fixed;
     top: 60px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .spacer {
@@ -10,4 +12,13 @@ mat-vertical-stepper {
 .checkout-page {
     position: fixed;
     top: 60px;
+}
+
+.cart-total {
+    display: flex;
+    margin: 5px;
+}
+
+.space {
+    margin: 5px;
 }

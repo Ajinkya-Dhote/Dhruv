@@ -11,3 +11,9 @@
     max-height: 400px;
     overflow-y: auto;
 }
+
+.checkout {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 5px;
+}

@@ -14,13 +14,15 @@
   <mat-list-item *ngFor="let category of data.categories">
       <h3 matLine> <mat-chip color="accent" selected [hidden]="getCount(category.productId, category.id) === 0">{{getCount(category.productId, category.id)}} Unit(s)</mat-chip><strong> {{category.quantity}}</strong> {{category.unit}} for  <strong>{{category.price}}</strong> Rs</h3>
     <p matLine>
-        <button mat-button color="primary" (click)=add(category)>Add</button>
+        <button mat-button color="primary" (click)="add(category)">Add</button>
         <button mat-button color="warn" (click)="remove(category)">Remove</button>
     </p>
       <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
 
-<div [hidden]="isSumarryVisible()" (click)=goToCheckOut()>
-    <button mat-stroked-button color="accent">Checkout</button>
+<div [hidden]="isSumarryVisible()" (click)="goToCheckOut()">
+    <div class="checkout">
+        <button mat-stroked-button color="accent">Checkout</button>
+    </div>
 </div>

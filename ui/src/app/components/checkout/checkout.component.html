@@ -21,7 +21,7 @@
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
-      <div style="display: flex">
+      <div class="cart-total">
           <span class="spacer"></span>
           <button mat-stroked-button color="accent">Total: {{totalCost}} Rs</button>
       </div>
@@ -41,13 +41,13 @@
           </p>
         </mat-card-content>
       </mat-card>
-      <button mat-stroked-button color="accent"> Add new address </button>
+      <button mat-stroked-button color="accent" class="space"> Add new address </button>
     </mat-step>
     <mat-step label="payment" state="payment">
       <!-- <ng-template matStepLabel state="payment">
             <mat-icon>payment</mat-icon>
             Payment</ng-template> -->
-      <button mat-stroked-button aria-label="pay" color="accent">
+      <button mat-stroked-button aria-label="pay" color="accent" class="space">
         Pay {{totalCost}} Rs
       </button>
     </mat-step>

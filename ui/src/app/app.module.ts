@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { BaseProductComponent } from './components/base-product/base-product.component';
 
 import { DhruvUrlInterceptor } from "./app.interceptor";
+import { QuantityDialogComponent } from './common/components/quantity-dialog/quantity-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,7 +37,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductCardComponent,
     QuantitySelectComponent,
     CounterComponent,
-    BaseProductComponent
+    BaseProductComponent,
+    QuantityDialogComponent
   ],
   imports: [
     BrowserModule,

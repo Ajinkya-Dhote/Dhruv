@@ -1,110 +1,134 @@
 [
-    {
-        "id": "w1",
-        "name": "Sharbati Wheat Flour",
-        "tagline": "sab se sudh aata",
-        "categoery": "flour",
-        "image": "assets/images/flour-2.jpg",
-        "availabelIn": [10, 20, 30],
-        "discount": 20,
-        "description": "Murgi Ka Jaane Ande Ka Kya Hoga Are Life Milegi Ya Tave Pe Fry Hoga Koyi Na Jaane Apana Future Kya Hoga Hont Ghuma Siti Baja, Siti Bajaake Bol Bhaiya Aal Izz Well, Are Bhaiya Aal Izz Well Are Chaachu Aal Izz Well, Are Bhaiya Aal Izz Well",
-        "price": {
-            "10": {
-                "price": 40,
-                "discount": 10,
-                "discount price": 36
-            },
-            "20": {
-                "price": 80,
-                "discount": 15,
-                "discount price": 68
-            },
-            "30": {
-                "price": 120,
-                "discount": 20,
-                "discount price": 96
-            }
-        }
-    },
-    {
-        "id": "w2",
-        "name": "Accha wala Wheat Flour",
-        "tagline": "ye wala bhi sudh hai",
-        "categoery": "flour",
-        "image": "assets/images/flour-2.jpg",
-        "availabelIn": [10, 20, 30],
-        "discount": 20,
-        "description": "Jhatka zara sa mehsoos hua ek Life ki gaadi ne kass ke maara brake Ho raha hai kyun confuse mere dil Mashwara mera tu aazma ke dekh",
-        "price": {
-            "10": {
-                "price": 40,
-                "discount": 10,
-                "discount price": 36
-            },
-            "20": {
-                "price": 80,
-                "discount": 15,
-                "discount price": 68
-            },
-            "30": {
-                "price": 120,
-                "discount": 20,
-                "discount price": 96
-            }
-        }
-    },
-    {
-        "id": "w3",
-        "name": "MP Wheat Flour",
-        "tagline": "ye bhi wahi hai aacha wala aata",
-        "categoery": "flour",
-        "image": "assets/images/flour-2.jpg",
-        "availabelIn": [10, 20, 30],
-        "discount": 20,
-        "description": "Baby shark, doo, doo, doo, doo, doo, doo Baby shark, doo, doo, doo, doo, doo, doo Baby shark, doo, doo, doo, doo, doo, doo Baby shark",
-        "price": {
-            "10": {
-                "price": 40,
-                "discount": 10,
-                "discount price": 36
-            },
-            "20": {
-                "price": 80,
-                "discount": 15,
-                "discount price": 68
-            },
-            "30": {
-                "price": 120,
-                "discount": 20,
-                "discount price": 96
-            }
-        }
-    },
-    {
-        "id": "w4",
-        "name": "Super Wheat Flour",
-        "categoery": "flour",
-        "tagline": "kya likhu ab samaj nahi aa raha",
-        "image": "assets/images/flour-2.jpg",
-        "availabelIn": [10, 20, 30],
-        "discount": 0,
-        "description": "Johny, Johny, yes, papa Eating sugar? No, papa Telling lies? No, papa Open your mouth, hahaha!",
-        "price": {
-            "10": {
-                "price": 40,
-                "discount": 0,
-                "discount price": 0
-            },
-            "20": {
-                "price": 80,
-                "discount": 0,
-                "discount price": 0
-            },
-            "30": {
-                "price": 120,
-                "discount": 0,
-                "discount price": 0
-            }
-        }
+  {
+    "id": 2,
+    "name": "Sharbati",
+    "image": "string",
+    "dateFirstAvailable": "2020-07-25T16:42:16.12",
+    "available": true,
+    "description": "string",
+    "baseProductId": 1,
+    "categories": [
+      {
+        "id": 4,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 1.0,
+        "price": 50.0
+      },
+      {
+        "id": 5,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 2.0,
+        "price": 100.0
+      },
+      {
+        "id": 6,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 5.0,
+        "price": 500.0
+      },
+      {
+        "id": 7,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 10.0,
+        "price": 1000.0
+      },
+      {
+        "id": 8,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 15.0,
+        "price": 1500.0
+      },
+      {
+        "id": 9,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 20.0,
+        "price": 2000.0
+      },
+      {
+        "id": 11,
+        "productId": 2,
+        "unit": "KG",
+        "quantity": 30.0,
+        "price": 3000.0
+      },
+      {
+        "id": 12,
+        "productId": 20,
+        "unit": "KG",
+        "quantity": 50.0,
+        "price": 50000.0
+      }
+    ],
+    "baseProduct": {
+      "id": 1,
+      "name": "Wheat"
     }
+  },
+  {
+    "id": 3,
+    "name": "Organic",
+    "image": "",
+    "dateFirstAvailable": "2020-07-28T12:10:09.757",
+    "available": true,
+    "description": "fresh",
+    "baseProductId": 1,
+    "categories": [
+
+    ],
+    "baseProduct": {
+      "id": 1,
+      "name": "Wheat"
+    }
+  },
+  {
+    "id": 4,
+    "name": "MP Boat",
+    "image": "",
+    "dateFirstAvailable": "2020-07-28T12:19:07.602",
+    "available": true,
+    "description": "Imported",
+    "baseProductId": 1,
+    "categories": [
+
+    ],
+    "baseProduct": {
+      "id": 1,
+      "name": "Wheat"
+    }
+  },
+  {
+    "id": 1,
+    "name": "Lokwan",
+    "image": "string",
+    "dateFirstAvailable": "2020-07-28T15:08:27.815",
+    "available": true,
+    "description": "new product",
+    "baseProductId": 1,
+    "categories": [
+      {
+        "id": 1,
+        "productId": 1,
+        "unit": "KG",
+        "quantity": 5.0,
+        "price": 10.0
+      },
+      {
+        "id": 2,
+        "productId": 1,
+        "unit": "KG",
+        "quantity": 10.0,
+        "price": 20.0
+      }
+    ],
+    "baseProduct": {
+      "id": 1,
+      "name": "Wheat"
+    }
+  }
 ]

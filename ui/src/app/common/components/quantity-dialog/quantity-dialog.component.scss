@@ -1,0 +1,13 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header-image {
+  background-image: url('/assets/images/flour-bag.png');
+  background-size: cover;
+}
+
+.quantity-list {
+    height: 400px;
+    overflow-y: auto;
+}

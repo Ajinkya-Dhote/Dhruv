@@ -218,7 +218,7 @@ sap.ui.define([
 			};
 			$.ajax({				
 				url: "/api/product/",
-				type: sRequestType, //Specifies the operation to create the list item 		
+				type: sRequestType, 		
 				headers: headers,
 				data: oSendJSON,			
 				success: function (data, textStatus, respoonse) {

@@ -15,6 +15,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
 
 // import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
@@ -37,7 +38,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         MatMenuModule,
         MatGridListModule,
         MatListModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatStepperModule
     ]
 })
 

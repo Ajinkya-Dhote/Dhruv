@@ -1,0 +1,71 @@
+
+<div [hidden]="isCheckoutAvailable()">
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+
+
+    <mat-step label="Review your order" state="home">
+      <!-- <ng-template matStepLabel ></ng-template> -->
+
+      <mat-list>
+        <div mat-subheader>Purchased Items</div>
+        <mat-list-item *ngFor="let item of purchasedItems | keyvalue">
+          <button matListAvatar color="accent">{{item.value.purchasedUnits}}</button>
+          <div mat-line>
+            <span>{{item.value.name}}</span>
+          </div>
+          <div mat-line>{{item.value.quantity}} {{item.value.unit}} for {{item.value.price}} Rs</div>
+          <div matLine>
+            <button mat-button color="primary">Add</button>
+            <button mat-button color="warn">Remove</button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <div style="display: flex">
+          <span class="spacer"></span>
+          <button mat-stroked-button color="accent">Total: {{totalCost}} Rs</button>
+      </div>
+    </mat-step>
+    <mat-step state="home" label="Select address">
+      <!-- <ng-template matStepLabel ">Select Address</ng-template> -->
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>home</mat-icon>
+          <!-- <div mat-card-avatar class="example-header-image"></div> -->
+          <mat-card-title>Home</mat-card-title>
+          <!-- <mat-card-subtitle>Nagpur</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            22, Vigyan Nagar, Manewada, Nagpur - 440034
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <button mat-stroked-button color="accent"> Add new address </button>
+    </mat-step>
+    <mat-step label="payment" state="payment">
+      <!-- <ng-template matStepLabel state="payment">
+            <mat-icon>payment</mat-icon>
+            Payment</ng-template> -->
+      <button mat-stroked-button aria-label="pay" color="accent">
+        Pay {{totalCost}} Rs
+      </button>
+    </mat-step>
+
+    <ng-template matStepperIcon="edit">
+      <mat-icon>bubble_chart</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="home">
+      <mat-icon>reorder</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="home">
+      <mat-icon>home</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="payment">
+      <mat-icon>payment</mat-icon>
+    </ng-template>
+  </mat-vertical-stepper>
+</div>
+<div class="checkout-page w3-middle" [hidden]="!isCheckoutAvailable()">
+    You haven't purchase anything yet
+</div>

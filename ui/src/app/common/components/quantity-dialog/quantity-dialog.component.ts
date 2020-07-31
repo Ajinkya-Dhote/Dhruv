@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CartService } from '@services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quantity-dialog',
@@ -15,23 +16,28 @@ export class QuantityDialogComponent implements OnInit {
 
     constructor(public dialogRef: MatDialogRef<QuantityDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
-                public cartService: CartService) { }
+                public cartService: CartService,
+                public router: Router) { }
 
     onNoClick(): void {
         this.dialogRef.close();
+    }
+
+    goToCheckOut() {
+        this.dialogRef.close();
+        this.router.navigate(["checkout"]);
     }
 
     ngOnInit(): void {
     }
 
     add(quantity) {
+        quantity = {...quantity, productId: this.data.id, name: this.data.name, baseProductId: this.data.baseProductId};
         this.cartService.add(quantity);
-        console.log(this.cartService.get());
     }
 
     remove(quantity) {
         this.cartService.remove(quantity);
-        console.log(this.cartService.get());
     }
 
     isSumarryVisible() {

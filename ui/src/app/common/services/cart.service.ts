@@ -10,6 +10,7 @@ export class CartService {
     constructor() { }
 
     add(quantity) {
+        console.log(quantity);
         this.items.push(quantity);
     }
 

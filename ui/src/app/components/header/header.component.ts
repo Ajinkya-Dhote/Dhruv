@@ -5,7 +5,7 @@ import { MediaTypeService } from  '@services/media-type.service';
 import { LanguageService } from '@services/language.service';
 import { LoaderService } from '@services/loader.service';
 import { DeviceType } from '@models/DeviceType';
-
+import {CartService} from '@services/cart.service';
 interface CITIES {
   value: string;
   viewValue: string;
@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     constructor(private media: MediaTypeService,
                 private language: LanguageService,
-                private loader: LoaderService) {
+                private loader: LoaderService,
+                private cartService: CartService) {
       window.addEventListener('beforeinstallprompt', event => {
         this.promptEvent = event;
       });
@@ -57,6 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     installPwa(): void {
       this.promptEvent.prompt();
+    }
+
+    isCartVisible(): boolean {
+        return (this.cartService.get().length === 0);
     }
 
 }

@@ -23,7 +23,7 @@ export class QuantitySelectComponent implements OnInit {
     public dialog: MatDialog) {}
 
     ngOnInit(): void {
-        console.log(this.products);
+        // console.log(this.products);
     }
 
     openQuantitySelectionDialog(product): void {
@@ -34,7 +34,7 @@ export class QuantitySelectComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-
+        this._bottomSheetRef.dismiss();
       });
     }
 }

@@ -1,6 +1,14 @@
 <div class="fixed">
   <mat-toolbar class="header">
-    <span class="w3-wide">Pratideen</span>
+    <span class="w3-wide" [routerLink]="['/home']">Pratideen</span>
+
+    <span class="spacer"></span>
+    <div [hidden]="isCartVisible()">
+        <button mat-icon-button [routerLink]="['/checkout']" >
+            <mat-icon class="animate__animated animate__headShake">shopping_cart</mat-icon>
+        </button>
+    </div>
+
 
   </mat-toolbar>
   <div [hidden]="!isProgressBarVisible">

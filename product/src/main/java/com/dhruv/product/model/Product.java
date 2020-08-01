@@ -1,6 +1,10 @@
 package com.dhruv.product.model;
 
-import java.time.LocalDateTime;
+
+import java.time.LocalDateTime; 
+import lombok.*; 
+import org.springframework.data.annotation.CreatedDate;
+
 
 import javax.persistence.Column;
 

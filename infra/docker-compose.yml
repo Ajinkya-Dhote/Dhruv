@@ -55,6 +55,23 @@ services:
       - dhruv-postgres
       - dhruv-disovery
 
+  dhruv-mills:
+    image: ajinkyadhote/dhruv-mills
+    container_name: dhruv-mills
+
+    environment:
+      - DB_SERVER=dhruv-postgres
+      - POSTGRES_DB=pratideen
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DISCOVERY_SERVER=dhruv-disovery
+      - DISCOVERY_PORT=8082
+    ports:
+      - 8085:8085
+    links:
+      - dhruv-postgres
+      - dhruv-disovery
+
   dhruv-ui:
     image: ajinkyadhote/dhruv-ui
     container_name: dhruv-ui

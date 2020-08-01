@@ -12,18 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dhruv.mills.repository.MillsRepository;
+import com.dhruv.mills.service.MillsService;
 import com.dhruv.mills.service.model.Address;
 import com.dhruv.mills.service.model.Bank;
 import com.dhruv.mills.service.model.Mill;
 
 @Service
-public class MillsServiceImpl {
+public class MillsServiceImpl implements MillsService {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	MillsRepository millsRepository;
 
+	@Override
 	public List<Mill> getAllMills() {
 		logger.info("Getting list of all mills");
 		List<Mill> millList = new ArrayList<>();
@@ -33,6 +35,7 @@ public class MillsServiceImpl {
 		return millList;
 	}
 
+	@Override
 	public Mill retrivewMillByName(String millName) {
 		Mill mill = null;
 		if (!millName.isEmpty()) {
@@ -43,6 +46,7 @@ public class MillsServiceImpl {
 		return mill;
 	}
 
+	@Override
 	public Mill saveMill(Mill mill) {
 		Mill millObject = createMillObject(mill);
 		Mill savedMill = millsRepository.save(millObject);
@@ -87,6 +91,7 @@ public class MillsServiceImpl {
 		return customMillObj;
 	}
 
+	@Override
 	public boolean deleteMillById(@NotNull int id) {
 		Mill mill = millsRepository.findById(id);
 		if (null != mill) {

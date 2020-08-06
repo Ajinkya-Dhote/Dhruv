@@ -59,8 +59,8 @@ app.use('/', router);
 // Create a Server
 const server = app.listen(8089, function () {
  
-  let host = "localhost"; //server.address().address
-  let port = "8089"; // server.address().port
+  let host = process.env.HOST_NAME; //server.address().address
+  let port = process.env.HOST_PORT; // server.address().port
   
   console.log("App listening at http://%s:%s", host, port); 
 })

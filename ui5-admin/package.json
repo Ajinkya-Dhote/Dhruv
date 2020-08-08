@@ -11,7 +11,7 @@
 		"karma-ci": "rimraf coverage && karma start karma-ci.conf.js",
 		"watch": "npm run karma",
 		"test": "npm run lint && npm run karma-ci",
-		"build": "ui5 build -a --clean-dest",
+		"build": "npm run install_bower && ui5 build -a --clean-dest",
 		"build-self-contained": "ui5 build self-contained -a --clean-dest",
 		"serve-dist": "ws --compress -d dist",
 		"build-resources": "rimraf dist && ui5 build -a",
@@ -19,20 +19,24 @@
 		"start:dist": "serve dist",
 		"proxy": "node static_server.js",
 		"copy-resource": "node CopyFile.js",
-		"buildWithResources": "npm run build && npm run copy-resource"
+		"buildWithResources": "npm run build && npm run copy-resource",
+		"install_bower": "npm i - bower"
 	},
 	"dependencies": {
+		"-": "0.0.1",
+		"@openui5/sap.f": "1.60.27",
 		"@openui5/sap.m": "1.60.27",
 		"@openui5/sap.ui.core": "1.60.27",
-		"@openui5/sap.ui.unified": "1.60.27",
-		"@openui5/sap.f": "1.60.27",
 		"@openui5/sap.ui.layout": "1.60.27",
+		"@openui5/sap.ui.unified": "1.60.27",
 		"@openui5/themelib_sap_belize": "latest",
+		"bower": "^1.8.8",
 		"grunt": "^1.2.1",
+		"http-proxy": "^1.11.2",
 		"local-sync": "^2.0.5",
+		"openui5-camera": "0.0.11",
 		"supervisor": "^0.12.0",
-		"ui5-middleware-livereload": "*",
-		"http-proxy": "^1.11.2"
+		"ui5-middleware-livereload": "*"
 	},
 	"devDependencies": {
 		"@ui5/cli": "^2.3.1",

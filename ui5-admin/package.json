@@ -20,7 +20,7 @@
 		"proxy": "node static_server.js",
 		"copy-resource": "node CopyFile.js",
 		"buildWithResources": "npm run build && npm run copy-resource",
-		"install_bower": "npm i - bower"
+		"install_bower": "npm i - bower --allow-root"
 	},
 	"dependencies": {
 		"-": "0.0.1",

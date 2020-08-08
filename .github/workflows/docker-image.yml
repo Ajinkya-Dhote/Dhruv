@@ -115,6 +115,6 @@ jobs:
                   username: ${{ secrets.DOCKER_USERNAME }}
                   password: ${{ secrets.DOCKER_PASSWORD }}
                   repository: ajinkyadhote/dhruv-files-mgr
-                  dockerfile: ./ui5-admin/Dockerfile.prod
+                  dockerfile: ./files-mgr/Dockerfile.prod
                   path: ./files-mgr/
                   tags: latest

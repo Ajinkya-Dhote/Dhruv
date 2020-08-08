@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS public.mill
     latitude numeric,
     bank_id bigint NOT NULL DEFAULT 0,
     CONSTRAINT "Mill_pkey" PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS public.bank
 (
@@ -55,10 +55,11 @@ CREATE TABLE IF NOT EXISTS public.bank
     ifsc_code text COLLATE pg_catalog."default" NOT NULL,
     upi_id text COLLATE pg_catalog."default",
     CONSTRAINT bank_pkey PRIMARY KEY (id)
-)
+);
 
 CREATE SEQUENCE IF NOT EXISTS public.hibernate_sequence
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 92233720
+    CACHE 1;

@@ -5,12 +5,12 @@ var swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI =  require('swagger-ui-express');
 
 
-const cors = require('cors')
-const corsOptions = {
-  origin: 'http://localhost:4200',
-  optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
+// const cors = require('cors')
+// const corsOptions = {
+//   origin: 'http://localhost:4200',
+//   optionsSuccessStatus: 200
+// }
+// app.use(cors(corsOptions));
  
 global.__basedir = __dirname;
  
@@ -30,7 +30,7 @@ var swaggerDefinition = {
     version: '1.0.0',
     description: 'Upload Service',
   },
-  host: 'localhost:8080',
+  host: process.env.HOSTNAME+':'+process.env.HOSTPORT,
   basePath: '/',
 };
 
@@ -59,8 +59,8 @@ app.use('/', router);
 // Create a Server
 const server = app.listen(8089, function () {
  
-  let host = process.env.HOST_NAME; //server.address().address
-  let port = process.env.HOST_PORT; // server.address().port
+  let host = process.env.HOSTNAME; //server.address().address
+  let port = process.env.HOSTPORT; // server.address().port
   
   console.log("App listening at http://%s:%s", host, port); 
 })

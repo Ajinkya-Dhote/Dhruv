@@ -1,5 +1,5 @@
 {
-  "name": "Attachment_Oper",
+  "name": "files-mgr",
   "version": "1.0.0",
   "description": "Building a Node.js/Express RestAPIs that upload/download files to PostgreSQL database using Multer middleware, Sequelize ORM",
   "main": "server.js",
@@ -8,7 +8,7 @@
     "eslint": "eslint ./app",
     "eslint-fix": "eslint ./app --fix",
     "build": "webpack",
-    "prod": "node dist/api.bundle.js"   
+    "prod": "node dist/api.bundle.js"
   },
   "keywords": [
     "Node.js",

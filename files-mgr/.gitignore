@@ -1,4 +1,3 @@
-  
 # Logs
 logs
 *.log
@@ -53,6 +52,7 @@ web_modules/
 
 # Optional eslint cache
 .eslintcache
+.eslintrc.json
 
 # Microbundle cache
 .rpt2_cache/

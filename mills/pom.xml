@@ -26,10 +26,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -58,6 +54,13 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+	<dependency>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-ui</artifactId>
+		<version>1.4.1</version>
+	</dependency>
 
 	</dependencies>
 

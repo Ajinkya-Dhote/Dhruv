@@ -19,7 +19,8 @@
 		"start:dist": "serve dist",
 		"proxy": "node static_server.js",
 		"copy-resource": "node CopyFile.js",
-		"buildWithResources": "npm run build && npm run copy-resource"
+		"buildWithResources": "npm run build && npm run copy-resource",
+		"install_bower": "npm i - bower --allow-root"
 	},
 	"dependencies": {
 		"@openui5/sap.f": "1.60.27",
@@ -28,10 +29,10 @@
 		"@openui5/sap.ui.layout": "1.60.27",
 		"@openui5/sap.ui.unified": "1.60.27",
 		"@openui5/themelib_sap_belize": "latest",
+		"bower": "^1.8.8",
 		"grunt": "^1.2.1",
 		"http-proxy": "^1.11.2",
 		"local-sync": "^2.0.5",
-		"openui5-camera": "0.0.11",
 		"supervisor": "^0.12.0",
 		"ui5-middleware-livereload": "*"
 	},

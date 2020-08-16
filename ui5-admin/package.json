@@ -11,7 +11,7 @@
 		"karma-ci": "rimraf coverage && karma start karma-ci.conf.js",
 		"watch": "npm run karma",
 		"test": "npm run lint && npm run karma-ci",
-		"build": "npm run install_bower && ui5 build -a --clean-dest",
+		"build": "ui5 build -a --clean-dest",
 		"build-self-contained": "ui5 build self-contained -a --clean-dest",
 		"serve-dist": "ws --compress -d dist",
 		"build-resources": "rimraf dist && ui5 build -a",
@@ -34,7 +34,6 @@
 		"grunt": "^1.2.1",
 		"http-proxy": "^1.11.2",
 		"local-sync": "^2.0.5",
-		"openui5-camera": "0.0.11",
 		"supervisor": "^0.12.0",
 		"ui5-middleware-livereload": "*"
 	},

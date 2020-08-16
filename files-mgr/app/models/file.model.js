@@ -26,6 +26,9 @@ module.exports = (sequelize, Sequelize) => {
 		},
 		Part : {
 			type:  Sequelize.STRING
+		},
+		Exec : {
+			type:  Sequelize.STRING
 		}
 	});
 

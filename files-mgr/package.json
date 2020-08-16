@@ -35,7 +35,8 @@
     "swagger-ui-express": "4.1.4",
     "tedious": "^9.0.1",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "xlsx": "latest"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

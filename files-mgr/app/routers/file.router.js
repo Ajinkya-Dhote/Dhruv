@@ -4,7 +4,7 @@ let upload = require('../config/multer.config.js');
 var swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI =  require('swagger-ui-express');
 const fileWorker = require('../controllers/file.controller.js');
-
+const tableUploadWorker = require('../controllers/tableUpload.controller.js');
 /**
  * @swagger
  * definitions:
@@ -140,12 +140,22 @@ router.delete('/api/file/delete/:id', fileWorker.deleteFile);
 *       200:
 *         description: Successful confirmation
 */
-// var cpUpload = [
-//     {
 
-//     }
-
-// ];
 router.put('/api/file/update/:id', upload.single("file"), fileWorker.updateFile);
  
+/**
+ * @swagger
+ * /api/file/tableupload:
+ *   post:
+ *     tags:
+ *       - File
+ *     description: Creates a new Table
+ *     consumes:
+ *       - multipart/form-data
+ *     responses:
+ *       200:
+ *         description: Successfully uploaded
+ */
+router.post('/api/file/tableupload', tableUploadWorker.tableupload.single("file"), tableUploadWorker.uploadFile);
+
 module.exports = router;

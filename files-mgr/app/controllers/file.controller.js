@@ -13,6 +13,7 @@ exports.uploadFile = (req, res) => {
 	let sTransID = req.query.TransID ;
 	let sEncoding = req.headers.encoding;	
 	let sPart = req.query.Part;	
+	let sExecutive = req.query.Exec;	
 	let sFolder = sEntityID.split("_")[0];
 	let sFolderPath = sCity+"/"+ sFolder + "/" + req.file.originalname;
 	if(sFolder!="PRODUCT")
@@ -28,6 +29,7 @@ exports.uploadFile = (req, res) => {
 		Name: req.file.originalname,
 		FileData: req.file.buffer,
 		City: sCity,
+		Exec: sExecutive,
 		EntityID: sEntityID, // Ex. PRODUCT_1, CONSUMER_2, MILL_3
 		TransID : sTransID,
 		FolderPath : sFolderPath,
@@ -58,7 +60,7 @@ exports.uploadFile = (req, res) => {
 }
 
 exports.listAllFiles = (req, res) => {
-	File.findAll({attributes: ['id', 'Name', 'City', 'EntityID','TransID','FileType', 'FolderPath','Part']
+	File.findAll({attributes: ['id', 'Name', 'City', 'EntityID','TransID','FileType', 'FolderPath','Part', 'Exec']
 	}).then(files => {
 	  res.json(files);
 	}).catch(err => {

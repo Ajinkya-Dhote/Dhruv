@@ -11,7 +11,7 @@ var http = require("http"),
       // the prefix you use to call your backend functions via the proxy server
       prefix: "",
       // the host of your backend server
-      host: "52.66.212.18",
+      host: "15.206.125.138",
       // port of your backend server
       port: "8084"
     };

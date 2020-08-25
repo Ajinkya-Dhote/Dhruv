@@ -1,4 +1,7 @@
 const express = require('express');
+
+const fs = require("fs")
+
 const app = express();
 
 var swaggerJSDoc = require('swagger-jsdoc');
@@ -22,6 +25,20 @@ db.sequelize.sync({force: false}).then(() => {
 }); 
 
 let router = require('./app/routers/file.router.js');
+
+
+const { createLogger, transports } = require('winston');
+
+// Enable exception handling when you create your logger.
+const logger = createLogger({
+  transports: [
+    new transports.File({ filename: 'combined.log' }) 
+  ],
+  exceptionHandlers: [
+    new transports.File({ filename: 'exceptions.log' })
+  ]  
+});
+
 
 // swagger definition
 var swaggerDefinition = {
@@ -55,6 +72,7 @@ router.use('/api-uploadDocs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use('/', router);
 
+
 // console.log(process.env);
 // Create a Server
 const server = app.listen(8089, function () {
@@ -63,5 +81,18 @@ const server = app.listen(8089, function () {
   let port = process.env.HOSTPORT; // server.address().port
   
   console.log("App listening at http://%s:%s", host, port); 
+
+  logger.info("App listening at http://%s:%s", host, port);
 })
+
+process.on("uncaughtException", function(err)
+{
+// fs.appendFileSync("exceptions.log", "Exception - "+new Date()+ " - "+err.message)
+console.log("Exception - "+new Date()+ " - "+err.message)
+setTimeout(function() { process.exit(1) }, 1000);
+
+})
+
+})
+
 

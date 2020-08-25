@@ -1,3 +1,35 @@
+
+var swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI =  require('swagger-ui-express');
+/**
+ * @swagger
+ * definitions:
+ *   File:
+ * 	   type: Object
+ *     properties:
+ *       Name:
+ *         type: string
+ *       EntityID:
+ *         type: string
+ *       City:
+ *         type: string
+ *       TransID:
+ *         type: string
+ *       FileType:
+ *         type: string
+ *       FileData:
+ *         type: BLOB
+ *       FolderPath:
+ *         type: string
+ *       Encoding:
+ *         type: string
+ *       Part:
+ *         type: string
+ *       Exec:
+ *         type: string
+ */
+
+
 module.exports = (sequelize, Sequelize) => {
 	const File = sequelize.define('file', {
 		Name: {

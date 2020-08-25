@@ -3,6 +3,27 @@ const db = require('../config/db.config.js');
 const {Sequelize} = require('../config/db.config.js');
 const sequelize = require('sequelize');
 
+const { createLogger, transports } = require('winston');
+const DailyRotateFile = require('winston-daily-rotate-file');
+const logger = createLogger({
+	transports: [
+	  new transports.DailyRotateFile({ filename: "combined.log", dirname : __basedir+"//app//logging//",
+	  datePattern: 'YYYY-MM-DD-HH',
+    zippedArchive: true,
+    maxSize: '5m',
+    maxFiles: '14d'
+	}) 
+	],
+	exceptionHandlers: [
+		new transports.DailyRotateFile({ filename: "exceptions.log", dirname : __basedir+"//app//logging//",
+		datePattern: 'YYYY-MM-DD-HH',
+		zippedArchive: true,
+		maxSize: '5m',
+		maxFiles: '14d' })
+	]  
+  });
+
+
 const tablestorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, __basedir + "\\uploads\\")
@@ -66,7 +87,11 @@ function CreateSingleTableRecords (Table,sFileName,oTblMdl,strIndex,len,req, res
                 sentJSON : oRowsJson});
       else return CreateSingleTableRecords(Table, sFileName, oTblMdl, ++strIndex ,len,req, res,oRowsJson);
     }).catch(err => {
+
+      logger.info(err);
+
       console.log(err);
+
       res.json({ msg: 'Error', detail: err });
     });
   }

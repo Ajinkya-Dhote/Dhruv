@@ -5,26 +5,6 @@ var swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI =  require('swagger-ui-express');
 const fileWorker = require('../controllers/file.controller.js');
 const tableUploadWorker = require('../controllers/tableUpload.controller.js');
-/**
- * @swagger
- * definitions:
- *   File:
- *     properties:
- *       Name:
- *         type: string
- *       EntityID:
- *         type: string
- *       City:
- *         type: string
- *       TransID:
- *         type: string
- *       FileType:
- *         type: string
- *       FileData:
- *         type: BLOB
- *       FolderPath:
- *         type: string
- */
 
 /**
 * @swagger
@@ -46,7 +26,8 @@ router.get('/api/file/info', fileWorker.listAllFiles);
 
 /**
  * @swagger
- * /api/file/upload?City=NGP&EntityID=CON_232&TransID=435&Part=2:
+
+ * /api/file/upload?City=NGP&EntityID=MILL_232&TransID=435&Part=2
  *   post:
  *     tags:
  *       - File
@@ -72,7 +53,7 @@ router.post('/api/file/upload', upload.single("file"), fileWorker.uploadFile);
 
 /**
 * @swagger
-* /api/file/infoFilters?City=NGP&EntityID=232&TransID=435:
+* /api/file/infoFilters?City=NGP&EntityID=MILL_232&TransID=435
 *   get:
 *     tags:
 *       - Files
@@ -96,7 +77,7 @@ router.get('/api/file/infoFilters', fileWorker.findFilesByFilters);
 
 /**
 * @swagger
-* /api/file/info/{id}:
+* /api/file/{id}:
 *   get:
 *     tags:
 *       - Files
@@ -148,7 +129,7 @@ router.put('/api/file/update/:id', upload.single("file"), fileWorker.updateFile)
  * /api/file/tableupload:
  *   post:
  *     tags:
- *       - File
+ *       - Table
  *     description: Creates a new Table
  *     consumes:
  *       - multipart/form-data

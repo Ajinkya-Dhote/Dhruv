@@ -1,3 +1,4 @@
+
 var swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUI =  require('swagger-ui-express');
 /**
@@ -27,6 +28,7 @@ const swaggerUI =  require('swagger-ui-express');
  *       Exec:
  *         type: string
  */
+
 
 module.exports = (sequelize, Sequelize) => {
 	const File = sequelize.define('file', {

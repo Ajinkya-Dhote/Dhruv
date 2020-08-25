@@ -36,6 +36,7 @@
     "tedious": "^9.0.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
+
     "xlsx": "latest",
     "winston": "latest",
     "fs": "latest",

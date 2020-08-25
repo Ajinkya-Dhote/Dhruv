@@ -1,10 +1,13 @@
 var stream = require('stream');
+
 // const logger = require(__basedir+"\\server.js");
+
 // const s3UploadWorker = require('./controllers/s3upload.controller.js');
 const db = require('../config/db.config.js');
 const { Sequelize } = require('../config/db.config.js');
 const sequelize = require('sequelize');
 const File = db.files;
+
 const { createLogger, transports } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 const logger = createLogger({
@@ -28,6 +31,8 @@ const logger = createLogger({
 
 exports.uploadFile = (req, res) => {
 	try{
+exports.uploadFile = (req, res) => {
+
 	// Need Header Parameter 'encoding'
 	let sCity = req.query.City;
 	let sEntityID = req.query.EntityID ;
@@ -70,11 +75,16 @@ exports.uploadFile = (req, res) => {
 			res.json({msg:'File uploaded successfully! -> filename = ' +sFileName,
 				URL : '/api/file/' + sFileId +''});
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 		
 	}).catch(err => {
+
 	logger.info(err);
 		res.json({msg: 'Error', detail: err});
 	});
@@ -86,12 +96,22 @@ catch(err){
 }
 }
 
+		console.log(err);
+		res.json({msg: 'Error', detail: err});
+	});
+}
+
+
 exports.listAllFiles = (req, res) => {
 	File.findAll({attributes: ['id', 'Name', 'City', 'EntityID','TransID','FileType', 'FolderPath','Part', 'Exec']
 	}).then(files => {
 	  res.json(files);
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 }
@@ -124,7 +144,11 @@ db.sequelize.query(query.text, query.values)
 .then(files => {
 	  res.json(files);
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 }
@@ -148,7 +172,11 @@ exports.downloadFile = (req, res) => {
 		}
 		
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 }
@@ -160,7 +188,11 @@ exports.deleteFile = (req, res) => {
 	}).then(files => {
 	  res.json( {msg:"File Deleted with Id - " + sRequestedID});
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 }
@@ -178,7 +210,11 @@ exports.updateFile = (req, res) => {
 	).then(files => {
 	  res.json( {msg:"File Updated with Id - " + sRequestedID});
 	}).catch(err => {
+
 		logger.info(err);
+
+		console.log(err);
+
 		res.json({msg: 'Error', detail: err});
 	});
 }

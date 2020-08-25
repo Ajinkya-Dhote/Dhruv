@@ -2,6 +2,7 @@ const multer = require('multer');
 const db = require('../config/db.config.js');
 const {Sequelize} = require('../config/db.config.js');
 const sequelize = require('sequelize');
+
 const { createLogger, transports } = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 const logger = createLogger({
@@ -21,6 +22,7 @@ const logger = createLogger({
 		maxFiles: '14d' })
 	]  
   });
+
 
 const tablestorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -85,7 +87,11 @@ function CreateSingleTableRecords (Table,sFileName,oTblMdl,strIndex,len,req, res
                 sentJSON : oRowsJson});
       else return CreateSingleTableRecords(Table, sFileName, oTblMdl, ++strIndex ,len,req, res,oRowsJson);
     }).catch(err => {
+
       logger.info(err);
+
+      console.log(err);
+
       res.json({ msg: 'Error', detail: err });
     });
   }

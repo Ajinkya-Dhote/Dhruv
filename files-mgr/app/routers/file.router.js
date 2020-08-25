@@ -26,7 +26,8 @@ router.get('/api/file/info', fileWorker.listAllFiles);
 
 /**
  * @swagger
- * /api/file/upload?City=NGP&EntityID=MILL_232&TransID=435&Part=2:
+
+ * /api/file/upload?City=NGP&EntityID=MILL_232&TransID=435&Part=2
  *   post:
  *     tags:
  *       - File
@@ -52,7 +53,7 @@ router.post('/api/file/upload', upload.single("file"), fileWorker.uploadFile);
 
 /**
 * @swagger
-* /api/file/infoFilters?City=NGP&EntityID=MILL_232&TransID=435:
+* /api/file/infoFilters?City=NGP&EntityID=MILL_232&TransID=435
 *   get:
 *     tags:
 *       - Files

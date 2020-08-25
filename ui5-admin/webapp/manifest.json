@@ -32,6 +32,9 @@
 				"sap.ui.unified": {}				
 			}
 		},
+		"resourceRoots": {
+			"openui5.camera" : "./thirdparty/openui5/camera"
+		},
 		"contentDensities": {
 			"compact": true,
 			"cozy": true

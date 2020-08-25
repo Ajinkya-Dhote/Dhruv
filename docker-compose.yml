@@ -88,3 +88,14 @@ services:
        - ./ui5-admin/dist:/usr/share/nginx/html
     ports:
       - 9000:80
+
+  dhruv-files-mgr:
+    build: ./files-mgr
+    container_name: dhruv-files-mgr
+    ports:
+      - 8089:8089
+    environment:
+      - DB_SERVER=dhruv-postgres
+      - POSTGRES_DB=pratideen
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

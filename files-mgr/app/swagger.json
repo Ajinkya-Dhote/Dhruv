@@ -1,0 +1,17 @@
+  
+  { "info": {
+        "version": "1.0.0",
+        "title": "Upload Servcie APIs Document",
+        "description": "Upload Service",
+        "termsOfService": "",
+        "contact": {
+            "name": "Gaurav Shami",
+            "email": "gsmusic1993@gmail.com",
+            "url": ""
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    }
+}

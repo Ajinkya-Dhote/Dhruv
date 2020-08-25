@@ -36,7 +36,10 @@
     "tedious": "^9.0.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "xlsx": "latest"
+    "xlsx": "latest",
+    "winston": "latest",
+    "fs": "latest",
+    "winston-daily-rotate-file": "4.5.0"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
